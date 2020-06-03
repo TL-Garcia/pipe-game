@@ -33,13 +33,12 @@ header {
 main {
     height: 80%;
     display: flex;
-    align-items: center;
+    justify-content : center;
     background-color: darkRed ;
     border: 0.02rem solid black;
 }
 
 main > div {
-    width: 100%;
     margin-right: 1rem;
 }
 
