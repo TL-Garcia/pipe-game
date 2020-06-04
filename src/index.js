@@ -1,5 +1,4 @@
-const pipes = [...document.querySelectorAll('.pipe')];
 
+const game = new Game();
 
-const pipe1 = new Pipe(1, 1, 0);
-
+game.startLevel1()

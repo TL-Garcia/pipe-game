@@ -4,8 +4,8 @@ class Pipe {
         this.y = posY;
         this.direction = {
             n: false,
-            s: false,
             w: false,
+            s: false,
             e: false
         };
 
@@ -22,7 +22,6 @@ class Pipe {
     _setClick() {
         this.element.addEventListener('click', () => {
             this.rotate();
-            console.log('rotating!')
         })
     }
 
@@ -31,9 +30,12 @@ class Pipe {
         if (this.angle === 360) this.angle = 0;
 
         this.element.style.transform = `rotate(${this.angle}deg)`;
+
+        this.n = this.w;
+        this.w = this.s;
+        this.s = this.e;
+        this.e = this.n;
     }
 
-    _isActive() {
 
-    }
 }
