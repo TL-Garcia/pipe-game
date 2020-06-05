@@ -1,16 +1,16 @@
 class Level {
     constructor() {
         this.grid = [
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
+            [null, null, null, null, null, null],
+            [null, null, null, null, null, null],
+            [null, null, null, null, null, null],
+            [null, null, null, null, null, null],
+            [null, null, null, null, null, null],
+            [null, null, null, null, null, null],
         ]
     }
 
-    addPipe(row, x, y, angle) {
-        this.grid[row].push(new Pipe(x, y, angle))
+    addPipe(x, y, angle) {
+        this.grid[y][x] = new Pipe(x, y, angle)
     }
 }

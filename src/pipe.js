@@ -11,8 +11,8 @@ class Pipe {
 
         this.element = document.querySelector(`.square.x${this.x}y${this.y} div`)
 
-        /*Would be nice to limit input angle to 0-270*/
         this.angle = angle;
+        //need to write a method such that this.angle is reflected when pipe is created
 
         this.active = false;
 
