@@ -9,7 +9,8 @@ class Pipe {
             e: false
         };
 
-        this.element = document.querySelector(`.square.x${this.x}y${this.y} div`)
+        this.element = document.querySelector(`.square.x${this.x}y${this.y}`)
+        this.element.innerHTML =  '<div class="pipe"><img src="./img/blue_pipe.png" alt=""></div>'
 
         this.angle = angle;
         //need to write a method such that this.angle is reflected when pipe is created
@@ -36,6 +37,11 @@ class Pipe {
         this.s = this.e;
         this.e = this.n;
     }
-
-
 }
+
+
+/* class StraightPipe extends Pipe {
+    constructor(posX, posY, angle) {
+        super(posX, posY, angle)
+    }
+} */
