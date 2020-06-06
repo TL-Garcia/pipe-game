@@ -10,10 +10,9 @@ class Pipe {
         };
 
         this.element = document.querySelector(`.square.x${this.x}y${this.y}`)
-        this.element.innerHTML =  '<div class="pipe"><img src="./img/blue_pipe.png" alt=""></div>'
+        this.element.innerHTML = '<div class="pipe"><img src="./img/blue_pipe.png" alt=""></div>'
 
         this.angle = angle;
-        //need to write a method such that this.angle is reflected when pipe is created
 
         this.active = false;
 
@@ -22,26 +21,82 @@ class Pipe {
 
     _setClick() {
         this.element.addEventListener('click', () => {
-            this.rotate();
+            this.angle += 90;
+            this._rotate();
         })
     }
 
-    rotate() {
-        this.angle += 90;
+    _rotate() {
         if (this.angle === 360) this.angle = 0;
 
         this.element.style.transform = `rotate(${this.angle}deg)`;
-
-        this.n = this.w;
-        this.w = this.s;
-        this.s = this.e;
-        this.e = this.n;
+        
+        const temp = this.direction.n;
+        this.direction.n = this.direction.w;
+        this.direction.w = this.direction.s;
+        this.direction.s = this.direction.e;
+        this.direction.e = temp;
     }
 }
 
 
-/* class StraightPipe extends Pipe {
+class StraightPipe extends Pipe {
     constructor(posX, posY, angle) {
-        super(posX, posY, angle)
+        super(posX, posY, angle);
+
+        this.element.innerHTML = '<div class="pipe"><img src="./img/blue_pipe.png" alt=""></div>';
+
+        this.direction = {
+            n: true,
+            w: false,
+            s: true,
+            e: false
+        };
+
+        for (let i = 0; i < this.angle; i += 90) {
+            this._rotate();
+        }
     }
-} */
+}
+
+
+class CurvedPipe extends Pipe {
+    constructor(posX, posY, angle) {
+        super(posX, posY, angle);
+
+        this.element.innerHTML = '<div class="pipe"><img src="./img/blue_curve.png" alt=""></div>';
+
+        this.direction = {
+            n: false,
+            w: false,
+            s: true,
+            e: true
+        };
+
+        for (let i = 0; i < this.angle; i += 90) {
+            this._rotate();
+        }
+    }
+}
+
+
+class TPipe extends Pipe {
+    constructor(posX, posY, angle) {
+        super(posX, posY, angle);
+
+        this.element.innerHTML = '<div class="pipe"><img src="./img/blue_t.png" alt=""></div>';
+
+        this.direction = {
+            n: false,
+            w: true,
+            s: true,
+            e: true
+        };
+
+        for (let i = 0; i < this.angle; i += 90) {
+            this._rotate();
+        }
+    }
+}
+
+
