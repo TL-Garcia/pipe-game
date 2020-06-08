@@ -16,14 +16,6 @@ class Pipe {
 
         this.active = false;
 
-        this._setClick();
-    }
-
-    _setClick() {
-        this.element.addEventListener('click', () => {
-            this.angle += 90;
-            this._rotate();
-        })
     }
 
     _rotate() {
