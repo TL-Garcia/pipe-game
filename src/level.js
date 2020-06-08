@@ -8,6 +8,8 @@ class Level {
             [null, null, null, null, null, null],
             [null, null, null, null, null, null],
         ];
+
+        this.path = []
     }
 
     addPipe(x, y, angle) {
@@ -29,57 +31,145 @@ class Level {
             p && p.element.addEventListener('click', () => {
                 p.angle += 90;
                 p._rotate();
-                this.isActive(p);
+                this._changeState(p);
             });
         });
     }
 
-    isActive(target) {
-        if (target.x === 0 && target.y === 0) target.active = true;
-
-        if (target.y - 1 >= 0 && target.direction.n) this._checkNeigbours(target, 'n');
-
-        if (target.x + 1 <= 5 && target.direction.e) this._checkNeigbours(target, 'e');
-
-        if (target.y + 1 <= 5 && target.direction.s) this._checkNeigbours(target, 's');
-
-        if (target.x - 1 > 0 && target.direction.w) this._checkNeigbours(target, 'w');
-
-        if (target.active) console.log(`I'm on ${target.x} ${target.y} and I'm active`)
-    }
-
-    _checkNeigbours(target, checkDir) {
-        const targetDir = target.direction[checkDir];
-        let neighbour;
-        let neighbourDir;
-
-        switch (checkDir) {
-            case 'n':
-                neighbour = this.grid[target.y - 1][target.x] ;
-                if (!neighbour) return;
-                neighbourDir = neighbour.direction.s;
-                break;
-
-            case 'e':
-                neighbour = this.grid[target.y][target.x + 1] ;
-                if (!neighbour) return;
-                neighbourDir = neighbour.direction.w;
-                break;
-
-            case 's':
-                neighbour = this.grid[target.y + 1][target.x] ;
-                if (!neighbour) return;
-                neighbourDir = neighbour.direction.n;
-                break;
-
-            case 'w':
-                neighbour = this.grid[target.y][target.x - 1] ;
-                if (!neighbour) return;
-                neighbourDir = neighbour.direction.e;
-                break;
+    _changeState(target) {
+        if (target.x === 0 && target.y === 0) {
+            target.active = true;
+            this.path.push(target);
+            return;
         }
 
+        const outcome = this._decideOutcome(target);
+        const action = outcome[0];
+        const neighbours = outcome[1];
+    
 
-        if (neighbour.active && neighbourDir) target.active = true;
+        switch (action) {
+            case 'activate':
+                target.active = true;
+                this.path.push(target);
+
+                neighbours.length > 0 && neighbours.forEach(n => this._changeState(n));
+
+                break;
+
+            case 'deactivate':
+                const tIndex = this.path.indexOf(target);
+                const lastIndex = this.path.length - 1;
+
+                for (let i = lastIndex; i >= tIndex; i--) {
+                    this.path[i].active = false;
+                    this.path.pop();
+                }
+                break;
+
+            case 'pass':
+                neighbours.length > 0 && neighbours.forEach(n => this._changeState(n));
+                return;
+        }
+        return console.log(game.currentLevel.path)
+    }
+
+    _decideOutcome(target) {
+        const isTargetActive = this._isTargetActive(target);
+
+        const neighbours = this._areNeighboursActive(target);
+        const activeNeighbours = neighbours.aN;
+        const inactiveNeighbours = neighbours.iN;
+
+        if (isTargetActive && activeNeighbours.length) {
+            const targetIndex = this.path.indexOf(target);
+
+            const neighboursPrecedingTarget = activeNeighbours.filter(n => {
+                return (this.path.indexOf(n) < targetIndex);
+            })
+
+            if (neighboursPrecedingTarget.length) {
+                return ['pass', inactiveNeighbours];
+            } else {
+                return ['deactivate', inactiveNeighbours];
+            }
+        } else if (isTargetActive && !activeNeighbours.length) {
+            return ['deactivate', inactiveNeighbours];
+        } else if (!isTargetActive && activeNeighbours.length) {
+            return ['activate', inactiveNeighbours];
+        } else if (!isTargetActive && !activeNeighbours.length) {
+            return ['pass', inactiveNeighbours];
+        } else {
+            throw console.error('state conditions do not match');
+        }
+    }
+
+    _isTargetActive(target) {
+        const isTargetOnPath = (this.path.indexOf(target) !== -1)
+
+        if (isTargetOnPath === target.active) {
+            return target.active;
+        } else {
+            throw console.error(`target state doesn't match path`);
+        }
+    }
+
+    _areNeighboursActive(target) {
+        const neighbours = this._findNeigbours(target);
+
+        const activeNeighbours = neighbours.filter(n => this.path.indexOf(n) !== -1);
+        const inactiveNeighbours = neighbours.filter(n => this.path.indexOf(n) === -1);
+
+        return {
+            aN: activeNeighbours,
+            iN: inactiveNeighbours
+        };
+    }
+
+    _findNeigbours(target) {
+        let neighbour;
+        const neighbours = [];
+        const targetDir = Object.keys(target.direction).filter(d => {
+            if (target.direction[d] && this._neighbourExists(target, d)) return true;
+        });
+
+        targetDir.forEach(d => {
+            switch (d) {
+                case 'n':
+                    neighbour = this.grid[target.y - 1][target.x];
+                    if (neighbour && neighbour.direction.s) neighbours.push(neighbour);
+                    break;
+
+                case 'e':
+                    neighbour = this.grid[target.y][target.x + 1];
+                    if (neighbour && neighbour.direction.w) neighbours.push(neighbour);
+                    break;
+
+                case 's':
+                    neighbour = this.grid[target.y + 1][target.x];
+                    if (neighbour && neighbour.direction.n) neighbours.push(neighbour);
+                    break;
+
+                case 'w':
+                    neighbour = this.grid[target.y][target.x - 1];
+                    if (neighbour && neighbour.direction.e) neighbours.push(neighbour);
+                    break;
+            }
+        })
+
+        return neighbours;
+    }
+
+    _neighbourExists(target, checkDir) {
+        switch (checkDir) {
+            case 'n':
+                return (target.y - 1 >= 0);
+            case 'e':
+                return (target.x + 1 <= 5);
+            case 's':
+                return (target.y + 1 <= 5);
+            case 'w':
+                return (target.x - 1 >= 0);
+        }
     }
 }
