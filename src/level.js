@@ -31,7 +31,7 @@ class Level {
             p && p.element.addEventListener('click', () => {
                 p.angle += 90;
                 p._rotate();
-                this.isActive(p);
+                this._changeState(p);
             });
         });
     }
