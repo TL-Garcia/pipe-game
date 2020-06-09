@@ -44,11 +44,17 @@ class Level {
         }
 
         const outcome = this._decideOutcome(target);
+        const action = outcome[0];
+        const neighbours = outcome[1];
+    
 
-        switch (outcome) {
+        switch (action) {
             case 'activate':
                 target.active = true;
                 this.path.push(target);
+
+                neighbours.length > 0 && neighbours.forEach(n => this._changeState(n));
+
                 break;
 
             case 'deactivate':
@@ -62,13 +68,18 @@ class Level {
                 break;
 
             case 'pass':
+                neighbours.length > 0 && neighbours.forEach(n => this._changeState(n));
                 return;
         }
+        return console.log(game.currentLevel.path)
     }
 
     _decideOutcome(target) {
         const isTargetActive = this._isTargetActive(target);
-        const activeNeighbours = this._areNeighboursActive(target);
+
+        const neighbours = this._areNeighboursActive(target);
+        const activeNeighbours = neighbours.aN;
+        const inactiveNeighbours = neighbours.iN;
 
         if (isTargetActive && activeNeighbours.length) {
             const targetIndex = this.path.indexOf(target);
@@ -78,16 +89,16 @@ class Level {
             })
 
             if (neighboursPrecedingTarget.length) {
-                return 'pass';
+                return ['pass', inactiveNeighbours];
             } else {
-                return 'deactivate';
+                return ['deactivate', inactiveNeighbours];
             }
         } else if (isTargetActive && !activeNeighbours.length) {
-            return 'deactivate';
+            return ['deactivate', inactiveNeighbours];
         } else if (!isTargetActive && activeNeighbours.length) {
-            return 'activate';
+            return ['activate', inactiveNeighbours];
         } else if (!isTargetActive && !activeNeighbours.length) {
-            return 'pass';
+            return ['pass', inactiveNeighbours];
         } else {
             throw console.error('state conditions do not match');
         }
@@ -107,8 +118,12 @@ class Level {
         const neighbours = this._findNeigbours(target);
 
         const activeNeighbours = neighbours.filter(n => this.path.indexOf(n) !== -1);
+        const inactiveNeighbours = neighbours.filter(n => this.path.indexOf(n) === -1);
 
-        return activeNeighbours;
+        return {
+            aN: activeNeighbours,
+            iN: inactiveNeighbours
+        };
     }
 
     _findNeigbours(target) {
