@@ -2,10 +2,6 @@ html ,body {
     height: 100%;
 }
 
-.row {
-    height: 100%;
-}
-
 .side {
     width: 15%;
 }
@@ -16,7 +12,7 @@ html ,body {
 /* HEADER */
 
 header {
-    height: 20% ; 
+    height: 8rem ; 
     background-color: orange;
     border: 0.02rem solid black;
 }
@@ -31,8 +27,9 @@ header {
 /* MAIN */
 
 main {
-    height: 80%;
+    height: 35rem;
     display: flex;
+    align-items: center;
     justify-content : center;
     background-color: darkRed ;
     border: 0.02rem solid black;
@@ -43,13 +40,13 @@ main > div {
 }
 
 main .row {
-    height: 4.5rem;
+    height: 5rem;
     margin: 0;
 }
 .square {
     background-color: red;
-    width: 5.5rem;
-    height: 5.5rem;
+    width: 5rem;
+    height: 5rem;
     border: 0.02rem solid black;
 }
 

@@ -15,6 +15,7 @@ class Game {
         this.currentLevel.addPipe(4, 2, 0)
         this.currentLevel.addPipe(5, 2, 0)
 
+        this.currentLevel.unifyGrid();
         this.currentLevel.setClick();
     }
 }
