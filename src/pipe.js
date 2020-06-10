@@ -10,7 +10,6 @@ class Pipe {
         };
 
         this.element = document.querySelector(`.square.x${this.x}y${this.y}`)
-        this.element.innerHTML = '<div class="pipe"><img src="./img/blue_pipe.png" alt=""></div>'
 
         this.angle = angle;
 
@@ -22,7 +21,7 @@ class Pipe {
         if (this.angle === 360) this.angle = 0;
 
         this.element.style.transform = `rotate(${this.angle}deg)`;
-        
+
         const temp = this.direction.n;
         this.direction.n = this.direction.w;
         this.direction.w = this.direction.s;
@@ -36,7 +35,8 @@ class StraightPipe extends Pipe {
     constructor(posX, posY, angle) {
         super(posX, posY, angle);
 
-        this.element.innerHTML = '<div class="pipe"><img src="./img/blue_pipe.png" alt=""></div>';
+        this.element.innerHTML = '<div class="pipe"><img class="straight-pipe-img" src="./img/blue_pipe.png" alt=""></div>';
+        this.img = this.element.querySelector('.pipe > img');
 
         this.direction = {
             n: true,
@@ -49,6 +49,14 @@ class StraightPipe extends Pipe {
             this._rotate();
         }
     }
+
+    updateImg() {
+        if (this.active) {
+            this.img.src = './img/red_pipe.png';
+        } else {
+            this.img.src = './img/blue_pipe.png';
+        }
+    }
 }
 
 
@@ -57,6 +65,9 @@ class CurvedPipe extends Pipe {
         super(posX, posY, angle);
 
         this.element.innerHTML = '<div class="pipe"><img src="./img/blue_curve.png" alt=""></div>';
+
+        this.img = this.element.querySelector('.pipe > img');
+
 
         this.direction = {
             n: false,
@@ -69,6 +80,14 @@ class CurvedPipe extends Pipe {
             this._rotate();
         }
     }
+
+    updateImg() {
+        if (this.active) {
+            this.img.src = './img/red_curve.png';
+        } else {
+            this.img.src = './img/blue_curve.png';
+        }
+    }
 }
 
 
@@ -77,6 +96,7 @@ class TPipe extends Pipe {
         super(posX, posY, angle);
 
         this.element.innerHTML = '<div class="pipe"><img src="./img/blue_t.png" alt=""></div>';
+        this.img = this.element.querySelector('.pipe > img');
 
         this.direction = {
             n: false,
@@ -89,6 +109,12 @@ class TPipe extends Pipe {
             this._rotate();
         }
     }
+
+    updateImg() {
+        if (this.active) {
+            this.img.src = './img/red_t.png';
+        } else {
+            this.img.src = './img/blue_t.png';
+        }
+    }
 }
-
-

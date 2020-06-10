@@ -9,7 +9,9 @@ class Level {
             [null, null, null, null, null, null],
         ];
 
-        this.path = []
+        this.unifiedGrid = [] 
+
+        this.path = [];
     }
 
     addPipe(x, y, angle) {
@@ -24,14 +26,18 @@ class Level {
         this.grid[y][x] = new TPipe(x, y, angle);
     }
 
+    unifyGrid() {
+        this.unifiedGrid = [].concat.apply([], this.grid)
+    }
 
     setClick() {
-        const unifiedGrid = [].concat.apply([], this.grid);
-        unifiedGrid.forEach(p => {
+        this.unifiedGrid.forEach(p => {
             p && p.element.addEventListener('click', () => {
                 p.angle += 90;
                 p._rotate();
                 this._changeState(p);
+                this._updateImgs();
+                this._levelComplete();
             });
         });
     }
@@ -69,9 +75,8 @@ class Level {
 
             case 'pass':
                 neighbours.length > 0 && neighbours.forEach(n => this._changeState(n));
-                return;
+                break;
         }
-        return console.log(game.currentLevel.path)
     }
 
     _decideOutcome(target) {
@@ -171,5 +176,13 @@ class Level {
             case 'w':
                 return (target.x - 1 >= 0);
         }
+    }
+
+    _updateImgs() {
+            this.unifiedGrid.forEach(p => p && p.updateImg());
+    }
+
+    _levelComplete() {
+
     }
 }
