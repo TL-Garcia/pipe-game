@@ -17,7 +17,7 @@ class Pipe {
 
     }
 
-    _rotate() {
+    rotate() {
         if (this.angle === 360) this.angle = 0;
 
         this.element.style.transform = `rotate(${this.angle}deg)`;
@@ -46,7 +46,7 @@ class StraightPipe extends Pipe {
         };
 
         for (let i = 0; i < this.angle; i += 90) {
-            this._rotate();
+            this.rotate();
         }
     }
 
@@ -77,7 +77,7 @@ class CurvedPipe extends Pipe {
         };
 
         for (let i = 0; i < this.angle; i += 90) {
-            this._rotate();
+            this.rotate();
         }
     }
 
@@ -106,7 +106,7 @@ class TPipe extends Pipe {
         };
 
         for (let i = 0; i < this.angle; i += 90) {
-            this._rotate();
+            this.rotate();
         }
     }
 
