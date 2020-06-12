@@ -14,6 +14,15 @@ class Level {
         this.path = [];
     }
 
+    setStart(x, y) {
+        this.start = this.grid[y][x];
+        
+    }
+
+    setEnd(x, y) {
+        this.end = this.grid[y][x];
+    }
+
     addPipe(x, y, angle) {
         this.grid[y][x] = new StraightPipe(x, y, angle);
     }
@@ -30,19 +39,9 @@ class Level {
         this.unifiedGrid = [].concat.apply([], this.grid)
     }
 
-    setClick() {
-        this.unifiedGrid.forEach(p => {
-            p && p.element.addEventListener('click', () => {
-                p.angle += 90;
-                p._rotate();
-                this._changeState(p);
-                this._updateImgs();
-                this._levelComplete();
-            });
-        });
-    }
 
-    _changeState(target) {
+
+    changeState(target) {
         if (target.x === 0 && target.y === 0) {
             target.active = true;
             this.path.push(target);
@@ -59,7 +58,7 @@ class Level {
                 target.active = true;
                 this.path.push(target);
 
-                neighbours.length > 0 && neighbours.forEach(n => this._changeState(n));
+                neighbours.length > 0 && neighbours.forEach(n => this.changeState(n));
 
                 break;
 
@@ -74,7 +73,7 @@ class Level {
                 break;
 
             case 'pass':
-                neighbours.length > 0 && neighbours.forEach(n => this._changeState(n));
+                neighbours.length > 0 && neighbours.forEach(n => this.changeState(n));
                 break;
         }
     }
@@ -178,11 +177,7 @@ class Level {
         }
     }
 
-    _updateImgs() {
+    updateImgs() {
             this.unifiedGrid.forEach(p => p && p.updateImg());
-    }
-
-    _levelComplete() {
-
     }
 }
