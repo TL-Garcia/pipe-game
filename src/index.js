@@ -1,4 +1,4 @@
 
 const game = new Game();
+game.startLevel0();
 
-game.startLevel1()
