@@ -42,7 +42,7 @@ class Level {
 
 
     changeState(target) {
-        if (target.x === 0 && target.y === 0) {
+        if (target.x === 0 && target.y === 1) {
             target.active = true;
             this.path.push(target);
             return;

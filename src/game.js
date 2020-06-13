@@ -81,7 +81,7 @@ class Game {
 
         popupButton.addEventListener('click', () => {
             popup.style.display = 'none';
-            game._startLevel1();
+            game._startLevel2();
         });
     }
 
@@ -106,5 +106,42 @@ class Game {
         this.currentLevel.unifyGrid();
         this._setClick();
         this._setTimer(2000);
+    }
+
+    _startLevel2() {
+        this.currentLevel = new Level();
+        gridHTML.style.backgroundImage = "url('./img/tileAqua.png')";
+
+        this.currentLevel.addPipe(0, 1, 0);
+        this.currentLevel.addT(1, 1, 0);
+        this.currentLevel.addCurve(1, 0, 0);
+        this.currentLevel.addPipe(2, 0, 0);
+        this.currentLevel.addCurve(3, 0, 0);
+        this.currentLevel.addPipe(3, 1, 0);
+        this.currentLevel.addPipe(3, 2, 0);
+        this.currentLevel.addCurve(4, 2, 0);
+        this.currentLevel.addCurve(4, 1, 0);
+        this.currentLevel.addPipe(5, 2, 0);
+
+        this.currentLevel.addPipe(1, 2, 0);
+        this.currentLevel.addCurve(1, 3, 0);
+        this.currentLevel.addCurve(0, 3, 0);
+        this.currentLevel.addPipe(0, 4, 0);
+        this.currentLevel.addCurve(0, 5, 0);
+        this.currentLevel.addPipe(1, 5, 0);
+        this.currentLevel.addCurve(2, 5, 0);
+        this.currentLevel.addPipe(2, 4, 0);
+        this.currentLevel.addCurve(2, 3, 0);
+        this.currentLevel.addPipe(3, 3, 0);
+        this.currentLevel.addPipe(4, 3, 0);
+        this.currentLevel.addCurve(5, 3, 0);
+        this.currentLevel.addCurve(5, 4, 0);
+
+        this.currentLevel.setStart(0, 1);
+        this.currentLevel.setEnd(5, 4);
+
+        this.currentLevel.unifyGrid();
+        this._setClick();
+        this._setTimer(4000);
     }
 }
