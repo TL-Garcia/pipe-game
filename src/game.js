@@ -1,3 +1,9 @@
+const popup = document.getElementById('popup-menu');
+const popupTitle = document.querySelector('#popup-menu h3')
+const popupBtn = document.querySelector('#popup-menu button')
+const popupButton = document.getElementById('popup-button');
+const gridHTML = document.querySelector('.grid')
+
 class Game {
     constructor() {
         this.currentLevel;
@@ -5,7 +11,28 @@ class Game {
         this.intervalID;
     }
 
+    _clearLevel() {
+        this._clearClick();
+        this.currentLevel = null;
+        const squares = document.querySelectorAll('.square');
+        squares.forEach(sq => sq.innerHTML = '');
+    }
+
     _setClick() {
+        this.currentLevel.unifiedGrid.forEach(p => {
+            p && p.element.addEventListener('click', () => {
+                p.angle += 90;
+                p.rotate();
+                this.currentLevel.changeState(p);
+                this.currentLevel.updateImgs();
+                setTimeout(() => {
+                    this._levelComplete();
+                }, 50);
+            });
+        });
+    }
+
+    _clearClick() {
         this.currentLevel.unifiedGrid.forEach(p => {
             p && p.element.addEventListener('click', () => {
                 p.angle += 90;
@@ -31,17 +58,36 @@ class Game {
 
     _levelComplete() {
         if (this.currentLevel.end.active && this.currentLevel.end.direction.e) {
-            alert('LEVEL COMPLETED');
+            this._clearLevel();
+            popup.style.display = 'block';
+            popupTitle.innerText = 'You completed the level';
+            popupButton.innerText = 'NEXT LEVEL';
             clearInterval(this.intervalID);
         }
     }
 
     _gameOver() {
-        alert('GAME OVER')
+        game._clearLevel();
+        popup.style.display = 'block';
+        popupTitle.innerText = 'You have failed';
+        popupBtn.innerText = 'TRY AGAIN';
     }
 
-    startLevel1() {
+    startLevel0() {
+        gridHTML.style.backgroundImage = "url('./img/tileMetal.png')";
+        popup.style.display = 'block';
+        popupTitle.innerText = 'Welcome to the pipe game';
+        popupBtn.innerText = 'START GAME';
+
+        popupButton.addEventListener('click', () => {
+            popup.style.display = 'none';
+            game._startLevel1();
+        });
+    }
+
+    _startLevel1() {
         this.currentLevel = new Level();
+        gridHTML.style.backgroundImage = "url('./img/tileAqua.png')";
 
         this.currentLevel.addPipe(0, 0, 90);
         this.currentLevel.addCurve(0, 1, 0);
@@ -54,7 +100,7 @@ class Game {
         this.currentLevel.addPipe(5, 3, 0);
         this.currentLevel.addCurve(5, 4, 0);
 
-        this.currentLevel.setStart(0,0);
+        this.currentLevel.setStart(0, 0);
         this.currentLevel.setEnd(5, 4);
 
         this.currentLevel.unifyGrid();
