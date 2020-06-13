@@ -9,6 +9,7 @@ class Game {
         this.currentLevel;
         this.timeRemaining;
         this.intervalID;
+        this.levelNumber = 0;
     }
 
     _clearLevel() {
@@ -33,17 +34,7 @@ class Game {
     }
 
     _clearClick() {
-        this.currentLevel.unifiedGrid.forEach(p => {
-            p && p.element.addEventListener('click', () => {
-                p.angle += 90;
-                p.rotate();
-                this.currentLevel.changeState(p);
-                this.currentLevel.updateImgs();
-                setTimeout(() => {
-                    this._levelComplete();
-                }, 50);
-            });
-        });
+        // NEEDS TO REFERENCE CLICK EVENT BY NAME
     }
 
     _setTimer(timeLimit) {
@@ -59,10 +50,11 @@ class Game {
     _levelComplete() {
         if (this.currentLevel.end.active && this.currentLevel.end.direction.e) {
             this._clearLevel();
+            clearInterval(this.intervalID);
+            this.levelNumber++;
             popup.style.display = 'block';
             popupTitle.innerText = 'You completed the level';
             popupButton.innerText = 'NEXT LEVEL';
-            clearInterval(this.intervalID);
         }
     }
 
@@ -73,16 +65,25 @@ class Game {
         popupBtn.innerText = 'TRY AGAIN';
     }
 
+    _toNextLevel() {
+        popup.style.display = 'none';
+        switch (game.levelNumber) {
+            case 0:
+                game._startLevel1();
+                break;
+            case 1:
+                game._startLevel2();
+                break;
+        }
+    }
+
     startLevel0() {
         gridHTML.style.backgroundImage = "url('./img/tileMetal.png')";
         popup.style.display = 'block';
         popupTitle.innerText = 'Welcome to the pipe game';
         popupBtn.innerText = 'START GAME';
 
-        popupButton.addEventListener('click', () => {
-            popup.style.display = 'none';
-            game._startLevel2();
-        });
+        popupButton.addEventListener('click', this._toNextLevel);
     }
 
     _startLevel1() {
