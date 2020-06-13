@@ -16,7 +16,8 @@ class Level {
 
     setStart(x, y) {
         this.start = this.grid[y][x];
-        
+        this.start.active = true;
+        this.path.push(this.start);
     }
 
     setEnd(x, y) {
@@ -42,16 +43,10 @@ class Level {
 
 
     changeState(target) {
-        if (target.x === 0 && target.y === 1) {
-            target.active = true;
-            this.path.push(target);
-            return;
-        }
-
         const outcome = this._decideOutcome(target);
-        const action = outcome[0];
+        const action = target === this.start ? 'activate' : outcome[0];
         const neighbours = outcome[1];
-    
+        
 
         switch (action) {
             case 'activate':
@@ -147,7 +142,7 @@ class Level {
                 case 'e':
                     neighbour = this.grid[target.y][target.x + 1];
                     if (neighbour && neighbour.direction.w) neighbours.push(neighbour);
-                    break;
+                  break;
 
                 case 's':
                     neighbour = this.grid[target.y + 1][target.x];

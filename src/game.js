@@ -106,6 +106,8 @@ class Game {
         this.currentLevel.unifyGrid();
         this._setClick();
         this._setTimer(2000);
+        //THis is only for the start tile, we should create a special pipe > start class 
+        this.currentLevel.updateImgs();
     }
 
     _startLevel2() {
@@ -142,6 +144,9 @@ class Game {
 
         this.currentLevel.unifyGrid();
         this._setClick();
-        this._setTimer(4000);
+        this.currentLevel.changeState(this.currentLevel.start);
+        //this._setTimer(4000);
+
+        this.currentLevel.updateImgs();
     }
 }
