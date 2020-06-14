@@ -13,30 +13,24 @@
 </head>
 
 <body>
-    <div class="row">
+    <div class="center">
         <div class="side">
+            <h3>TIME LEFT</h3>
+            <progress id="time-bar" value="0" max="100"></progress>
             <aside>
-                <button type="button">START GAME</button>
+                <button type="button">RESTART</button>
             </aside>
         </div>
-        <div class="center">
-            <header>
-                <h1>TITLE GOES HERE</h1>
-                <div id="game-info">
-                    <h3>score:</h3>
-                    <h3>time remaining:</h3>
+        <main>
+
+            <div id="machine">
+                <div id="doc">
+                    <img src="./img/doc.png" alt="">
                 </div>
-            </header>
-            <main>
-                <div class = "animated slideInDown" id="popup-menu">
+                <div class="animated slideInDown" id="popup-menu">
                     <h3></h3>
                     <button type="button" id="popup-button"></button>
                 </div>
-
-                <div id="machine">
-                    <img src="./img/machine_grey.png" alt="">
-                </div>
-
                 <div class="grid">
                     <div class="row">
                         <div class="square x0y0"></div>
@@ -86,9 +80,13 @@
                         <div class="square x4y5"></div>
                         <div class="square x5y5"></div>
                     </div>
-            </main>
+                </div>
+            </div>
 
-        </div>
+            <div id="monster">
+                <img src="./img/monster.png" alt="">
+            </div>
+        </main>
     </div>
     <footer>
 
