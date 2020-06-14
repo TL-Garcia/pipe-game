@@ -35,7 +35,7 @@ class StraightPipe extends Pipe {
     constructor(posX, posY, angle) {
         super(posX, posY, angle);
 
-        this.element.innerHTML = '<div class="pipe"><img class="straight-pipe-img" src="./img/blue_pipe.png" alt=""></div>';
+        this.element.innerHTML = '<div class="pipe"><img class="straight-pipe-img" src="./img/pipe_straight.png" alt=""></div>';
         this.img = this.element.querySelector('.pipe > img');
 
         this.direction = {
@@ -52,9 +52,9 @@ class StraightPipe extends Pipe {
 
     updateImg() {
         if (this.active) {
-            this.img.src = './img/red_pipe.png';
+            this.img.src = './img/pipe_straight_active.png';
         } else {
-            this.img.src = './img/blue_pipe.png';
+            this.img.src = './img/pipe_straight.png';
         }
     }
 }
@@ -64,16 +64,16 @@ class CurvedPipe extends Pipe {
     constructor(posX, posY, angle) {
         super(posX, posY, angle);
 
-        this.element.innerHTML = '<div class="pipe"><img src="./img/blue_curve.png" alt=""></div>';
+        this.element.innerHTML = '<div class="pipe"><img src="./img/pipe_curve.png" alt=""></div>';
 
         this.img = this.element.querySelector('.pipe > img');
 
 
         this.direction = {
-            n: false,
+            n: true,
             w: false,
-            s: true,
-            e: true
+            s: false,
+            e: true,
         };
 
         for (let i = 0; i < this.angle; i += 90) {
@@ -83,9 +83,9 @@ class CurvedPipe extends Pipe {
 
     updateImg() {
         if (this.active) {
-            this.img.src = './img/red_curve.png';
+            this.img.src = './img/pipe_curve_active.png';
         } else {
-            this.img.src = './img/blue_curve.png';
+            this.img.src = './img/pipe_curve.png';
         }
     }
 }
@@ -95,7 +95,7 @@ class TPipe extends Pipe {
     constructor(posX, posY, angle) {
         super(posX, posY, angle);
 
-        this.element.innerHTML = '<div class="pipe"><img src="./img/blue_t.png" alt=""></div>';
+        this.element.innerHTML = '<div class="pipe"><img src="./img/pipe_t.png" alt=""></div>';
         this.img = this.element.querySelector('.pipe > img');
 
         this.direction = {
@@ -112,9 +112,9 @@ class TPipe extends Pipe {
 
     updateImg() {
         if (this.active) {
-            this.img.src = './img/red_t.png';
+            this.img.src = './img/pipe_t_active.png';
         } else {
-            this.img.src = './img/blue_t.png';
+            this.img.src = './img/pipe_t.png';
         }
     }
 }

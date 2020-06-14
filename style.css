@@ -72,19 +72,17 @@ header {
 
 .grid {
     z-index: 1;
-    position: absolute;
-    bottom: -4.6rem;
 }
 
 #machine {
-    position: absolute;
-    top: 4.5rem;
-    left: 8rem;
+    padding: 11rem;
+    background-position-x: -3.8rem;
+    background-position-y: 6.5rem;
+    background-image: url(./img/machine_grey.png);
+    background-size: 52.5rem;
+    background-repeat: no-repeat;
 }
 
-#machine img {
-    height: 39rem;
-}
 
 /* main {
     background-image: url(./img/machine_grey.png);
@@ -98,10 +96,6 @@ main {
     justify-content: center;
     background-color: darkRed;
     border: 0.02rem solid black;
-}
-
-main>div {
-    margin-right: 1rem;
 }
 
 main .row {
@@ -125,7 +119,7 @@ main .row {
 }
 
 .pipe img {
-    height: 4rem;
+    height: 5rem;
 }
 
 /* ASIDE */
