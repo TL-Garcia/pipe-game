@@ -16,9 +16,15 @@
     <div class="center">
         <div class="side">
             <h3>TIME LEFT</h3>
-            <progress id="time-bar" value="0" max="100"></progress>
+            <progress id="time-bar" value="100" max="100"></progress>
             <aside>
-                <button type="button">RESTART</button>
+                <div id="level-select">
+                    <button id="Lv1-btn" type="button">Lv 1</button>
+                    <button id="Lv2-btn" type="button">Lv 2</button>
+                    <button id="Lv3-btn" type="button">Lv 3</button>
+                    <button id="Lv4-btn" type="button">Lv 4</button>
+                    <button id="Lv5-btn" type="button">Lv 5</button>
+                </div>
             </aside>
         </div>
         <main>
@@ -29,7 +35,8 @@
                 </div>
                 <div class="animated slideInDown" id="popup-menu">
                     <h3></h3>
-                    <button type="button" id="popup-button"></button>
+                    <button type="button" id="next-button">NEXT LEVEL</button>
+                    <button type="button" id="try-again-button">TRY AGAIN</button>
                 </div>
                 <div class="grid">
                     <div class="row">
