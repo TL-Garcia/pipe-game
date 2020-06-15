@@ -178,6 +178,7 @@ class Game {
     }
 
     _startLevel2() {
+        this.gameMusic.play();
         this.currentLevel = new Level();
         this.timeLimit = 4500;
         gridHTML.style.backgroundImage = "url('./img/tileAqua.png')";
@@ -193,6 +194,7 @@ class Game {
     }
 
     _startLevel3() {
+        this.gameMusic.play();
         this.currentLevel = new Level();
         this.timeLimit = 5500;
         gridHTML.style.backgroundImage = "url('./img/tileAqua.png')";
@@ -208,6 +210,7 @@ class Game {
     }
 
     _startLevel4() {
+        this.gameMusic.play();
         this.currentLevel = new Level();
         this.timeLimit = 5800;
         gridHTML.style.backgroundImage = "url('./img/tileAqua.png')";
@@ -223,6 +226,7 @@ class Game {
     }
 
     _startLevel5() {
+        this.gameMusic.play();
         this.currentLevel = new Level();
         this.timeLimit = 7000;
         gridHTML.style.backgroundImage = "url('./img/tileAqua.png')";
