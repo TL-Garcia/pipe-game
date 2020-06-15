@@ -10,6 +10,10 @@ class Game {
         this.timeRemaining;
         this.intervalID;
         this.levelNumber = 0;
+
+        this.docCtx = document.getElementById('doc-canvas').getContext('2d');
+        this.doc = new Doc(this.docCtx);
+        this.doc.draw();
     }
 
     _clearLevel() {

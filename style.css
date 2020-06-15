@@ -9,25 +9,25 @@ body {
 }
 
 @keyframes slideInDown {
-  from {
-    transform: translate3d(0, -100%, 0);
-    visibility: visible;
-  }
+    from {
+        transform: translate3d(0, -100%, 0);
+        visibility: visible;
+    }
 
-  to {
-    transform: translate3d(0, 0, 0);
-  }
+    to {
+        transform: translate3d(0, 0, 0);
+    }
 }
 
 .slideInDown {
-  animation-name: slideInDown;
+    animation-name: slideInDown;
 }
 
 .fadeOutDown {
     animation-name: fadeOutDown;
 }
 
-.game{
+.game {
     display: flex;
 }
 
@@ -67,7 +67,7 @@ body {
     position: absolute;
     left: 14rem;
     top: -10.5rem;
-    margin-top: 3.5rem ;
+    margin-top: 3.5rem;
     margin-left: 4rem;
     padding: 6rem 11rem;
     background-position-x: -1.8rem;
@@ -90,11 +90,17 @@ main .row {
 }
 
 .square {
-    /*  background-image: url(./img/trak2_panel1b.png) ;*/
     background-size: cover;
     width: 5rem;
     height: 5rem;
     border: 0.02rem solid black;
+}
+
+#doc {
+    position: absolute;
+    top: 31rem;
+    left: -16rem;
+    background-image: url(./img/doc.png);
 }
 
 /* PIPES */
@@ -110,14 +116,22 @@ main .row {
 
 /* ASIDE */
 .side {
-   position: absolute; 
-   top: 6rem;
+    margin-left: 1rem;
+    position: absolute;
+    top: 6rem;
+    text-align: center;
+}
+
+#time-bar {
+    margin-bottom: 3rem;
+    height: 3rem;
+    width: 19rem;
 }
 
 aside {
+    width: 11rem;
     padding: 2.5rem;
-    margin-left: 1rem;
-    border: 0.02rem solid black;
+    order: 0.02rem solid black;
     background-color: #DDF305;
 }
 

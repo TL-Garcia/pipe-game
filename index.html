@@ -15,13 +15,18 @@
 <body>
     <div class="center">
         <div class="side">
+            <h3>TIME LEFT</h3>
+            <progress id="time-bar" value="0" max="100"></progress>
             <aside>
                 <button type="button">RESTART</button>
             </aside>
         </div>
         <main>
-            
+
             <div id="machine">
+                <div id="doc">
+                    <canvas id="doc-canvas"></canvas>
+                </div>
                 <div class="animated slideInDown" id="popup-menu">
                     <h3></h3>
                     <button type="button" id="popup-button"></button>
@@ -86,6 +91,7 @@
 
     <script src="./src/pipe.js"></script>
     <script src="./src/level.js"></script>
+    <script src="./src/doc.js"></script>
     <script src="./src/game.js"></script>
     <script src="./src/index.js"></script>
 </body>
