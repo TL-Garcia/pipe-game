@@ -21,7 +21,9 @@ class Game {
 
         this.click = new Audio('./sounds/click.mp3');
         this.electricity = new Audio('./sounds/electricity.wav');
-        this.fail = new Audio('./sounds/fail.wav');
+        this.fail = new Audio('./sounds/fail.mp3');
+        this.theme = new Audio('./sounds/theme.mp3');
+        this.gameMusic = new Audio('./sounds/game.mp3');
     }
 
     _clearLevel() {
@@ -86,6 +88,8 @@ class Game {
 
     _levelComplete() {
         if (this.currentLevel.end.active && this.currentLevel.end.direction.e) {
+            this.gameMusic.pause();
+            this.gameMusic.currentTime = 0;
             this.electricity.play();
             this._clearLevel();
             clearInterval(this.intervalID);
@@ -98,6 +102,8 @@ class Game {
     }
 
     _gameOver() {
+        this.gameMusic.pause();
+        this.gameMusic.currentTime = 0;
         this.fail.play();
         game._clearLevel();
         popup.style.display = 'block';
@@ -143,6 +149,7 @@ class Game {
         nextBtn.style.display = 'inline';
         nextBtn.innerText = 'START GAME';
         tryAgainBtn.style.display = 'none';
+        this.theme.play();
 
         nextBtn.addEventListener('click', () => {
             this.levelNumber++;
@@ -156,6 +163,7 @@ class Game {
     }
 
     _startLevel1() {
+        this.gameMusic.play();
         this.currentLevel = new Level();
         this.timeLimit = 2000;
         gridHTML.style.backgroundImage = "url('./img/tileAqua.png')";
@@ -305,13 +313,13 @@ class Game {
         this.currentLevel.addCurve(1, 0, 0);
         this.currentLevel.addPipe(2, 0, 0);
         this.currentLevel.addCurve(3, 0, 0);
-        
+
         this.currentLevel.addPipe(4, 0, 0);
         this.currentLevel.addPipe(5, 0, 0);
         this.currentLevel.addPipe(5, 1, 0);
         this.currentLevel.addPipe(5, 2, 0);
         this.currentLevel.addCurve(5, 3, 0);
-        
+
         this.currentLevel.addPipe(3, 1, 0);
         this.currentLevel.addCurve(3, 2, 0);
         this.currentLevel.addCurve(2, 2, 0);
