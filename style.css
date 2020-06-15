@@ -99,8 +99,22 @@ main .row {
 #doc {
     position: absolute;
     top: 31rem;
-    left: -16rem;
-    background-image: url(./img/doc.png);
+    left: -10rem;
+}
+
+#doc>img {
+    height: 11rem;
+}
+
+#monster {
+    position: absolute;
+    top: 19rem;
+    left: 64rem;
+    box-shadow: 0px 19px 20px 2px #07F261;
+}
+
+#monster>img {
+    height: 16rem;
 }
 
 /* PIPES */
@@ -116,6 +130,11 @@ main .row {
 
 /* ASIDE */
 .side {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
     margin-left: 1rem;
     position: absolute;
     top: 6rem;
