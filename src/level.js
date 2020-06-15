@@ -12,6 +12,8 @@ class Level {
         this.unifiedGrid = [] 
 
         this.path = [];
+
+        this.activationSound = new Audio('./sounds/activation.wav');
     }
 
     setStart(x, y) {
@@ -52,7 +54,7 @@ class Level {
             case 'activate':
                 target.active = true;
                 this.path.push(target);
-
+                this.activationSound.play();
                 neighbours.length > 0 && neighbours.forEach(n => this.changeState(n));
 
                 break;
