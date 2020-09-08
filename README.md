@@ -1,4 +1,4 @@
-# Pipe Game 
+# Pipe Game - WIP
 
 ## What is Pipe Game?
 You might be familiar with the Windows 2000 game *Pipes*. The Pipe Game is a clone of this game with a twist! 
@@ -13,4 +13,4 @@ Although there is a catch. The Doc didn't properly test his **Reanimator** machi
 
 So will you be the assistant of the year and give live to **The Monster** or will you leave the lab in pieces? 
 
-### Try it out now at: https://tl-garcia.github.io/pipe-game/
+
