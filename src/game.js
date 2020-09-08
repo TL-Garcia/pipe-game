@@ -22,7 +22,6 @@ class Game {
         this.click = new Audio('./sounds/click.mp3');
         this.electricity = new Audio('./sounds/electricity.wav');
         this.fail = new Audio('./sounds/fail.mp3');
-        this.theme = new Audio('./sounds/theme.mp3');
         this.gameMusic = new Audio('./sounds/game.mp3');
     }
 
@@ -149,7 +148,6 @@ class Game {
         nextBtn.style.display = 'inline';
         nextBtn.innerText = 'START GAME';
         tryAgainBtn.style.display = 'none';
-        this.theme.play();
 
         nextBtn.addEventListener('click', () => {
             this.levelNumber++;
