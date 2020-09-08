@@ -3,7 +3,7 @@
 ## What is Pipe Game?
 You might be familiar with the Windows 2000 game "Pipes". The Pipe Game is a clone of this game with a twist! 
 
-In the original game the objective was to join a water source to a drain via a series of pipes. In this re-imagination of the game we will be aiding a mad scientist (a.k.a: "The Doc") to hook up his *Reanimator* machine and create life! 
+In the original game the objective was to join a water source to a drain via a series of pipes. In this re-imagination of the game we will be aiding a mad scientist (a.k.a: **"The Doc"**) to hook up his *Reanimator* machine and create life! 
 
 ---
 #### Much more exciting, right?
