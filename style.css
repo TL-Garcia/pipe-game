@@ -1,6 +1,52 @@
-html,
 body {
-    height: 100%;
+    font-family: Copperplate ;
+    line-height: 1.7rem;
+}
+
+#menu {
+    z-index: 3;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    background-color: rgba(50, 50, 50, 0.99);
+    height: 104%;
+    width: 100%;
+    color: white;
+}
+
+#mute {
+    height: 1.8rem;
+    border-radius: 54%;
+    position: absolute;
+    top: 3rem;
+    left: 5rem;
+}
+
+#mute img{
+    height: 1.5rem;
+}
+
+#menu p {
+    margin-bottom: 1.5rem;
+}
+
+#menu > article {
+    width: 40%;
+    margin-top: 6rem;
+    margin-left: 22rem;
+}
+
+#menu h1 {
+    margin-bottom: 3rem;
+}
+
+#intro-animation {
+    display: none;
+    height: 20rem;
+    position: absolute;
+    top: 15rem;
+    left: -1.5rem;
 }
 
 .animated {
@@ -161,9 +207,7 @@ aside {
     font-size: small;
 }
 
-#level-select > btn {
-
-}
+#level-select>btn {}
 
 /* FOOTER */
 
