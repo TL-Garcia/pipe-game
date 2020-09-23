@@ -1,5 +1,5 @@
 class Level {
-    constructor() {
+    constructor(timeLimit) {
         this.grid = [
             [null, null, null, null, null, null],
             [null, null, null, null, null, null],
@@ -9,11 +9,46 @@ class Level {
             [null, null, null, null, null, null],
         ];
 
-        this.unifiedGrid = [] 
+        this.timeRemaining = timeLimit;
+
+        _setTimer() {
+            this.intervalID = setInterval(() => {
+                this.timeRemaining--;
+                this._updateTimeBar();
+                if (this.timeRemaining <= 0) {
+                    this._gameOver();
+                    clearInterval(this.intervalID);
+                }
+            }, 1);
+        }
 
         this.path = [];
 
         this.activationSound = new Audio('./sounds/activation.wav');
+        this.fail = new Audio('./sounds/fail.mp3');
+        this.gameMusic = new Audio('./sounds/game.mp3');
+    }
+
+    _updateTimeBar() {
+        const timeBar = document.getElementById('time-bar');
+        const timePercent = Math.round(100 * this.timeRemaining / this.timeLimit);
+        timeBar.value = timePercent;
+    }
+
+    _gameOver() {
+        const popup = document.getElementById('popup-menu');
+        const popupTitle = document.querySelector('#popup-menu h3');
+        const nextBtn = document.querySelector('#next-button');
+        const tryAgainBtn = document.querySelector('#try-again-button');
+        const popupButton = document.getElementById('popup-button');
+        this.levelTheme.pause();
+        this.levelTheme.currentTime = 0;
+        this.fail.play();
+        game._clearLevel();
+        popup.style.display = 'block';
+        popupTitle.innerText = 'You have failed';
+        nextBtn.style.display = 'none';
+        tryAgainBtn.style.display = 'inline';
     }
 
     setStart(x, y) {
@@ -38,17 +73,12 @@ class Level {
         this.grid[y][x] = new TPipe(x, y, angle);
     }
 
-    unifyGrid() {
-        this.unifiedGrid = [].concat.apply([], this.grid)
-    }
-
-
 
     changeState(target) {
         const outcome = this._decideOutcome(target);
         const action = target === this.start ? 'activate' : outcome[0];
         const neighbours = outcome[1];
-        
+
 
         switch (action) {
             case 'activate':
@@ -87,7 +117,7 @@ class Level {
 
             const neighboursPrecedingTarget = activeNeighbours.filter(n => {
                 return (this.path.indexOf(n) < targetIndex);
-            })
+            });
 
             if (neighboursPrecedingTarget.length) {
                 return ['pass', inactiveNeighbours];
@@ -106,7 +136,7 @@ class Level {
     }
 
     _isTargetActive(target) {
-        const isTargetOnPath = (this.path.indexOf(target) !== -1)
+        const isTargetOnPath = (this.path.indexOf(target) !== -1);
 
         if (isTargetOnPath === target.active) {
             return target.active;
@@ -144,7 +174,7 @@ class Level {
                 case 'e':
                     neighbour = this.grid[target.y][target.x + 1];
                     if (neighbour && neighbour.direction.w) neighbours.push(neighbour);
-                  break;
+                    break;
 
                 case 's':
                     neighbour = this.grid[target.y + 1][target.x];
@@ -156,7 +186,7 @@ class Level {
                     if (neighbour && neighbour.direction.e) neighbours.push(neighbour);
                     break;
             }
-        })
+        });
 
         return neighbours;
     }
@@ -175,6 +205,13 @@ class Level {
     }
 
     updateImgs() {
-            this.unifiedGrid.forEach(p => p && p.updateImg());
+        const flatGrid = this.grid.flat();
+        flatGrid.forEach(p => p && p.updateImg());
+    }
+
+
+    startLevel() {
+        this.currentLevel.changeState(this.currentLevel.start);
+        this.updateImgs();
     }
 }

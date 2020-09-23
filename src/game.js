@@ -4,7 +4,6 @@ const nextBtn = document.querySelector('#next-button');
 const tryAgainBtn = document.querySelector('#try-again-button');
 const popupButton = document.getElementById('popup-button');
 const gridHTML = document.querySelector('.grid');
-const timeBar = document.getElementById('time-bar');
 const lvl1Btn = document.getElementById('Lv1-btn');
 const lvl2Btn = document.getElementById('Lv2-btn');
 const lvl3Btn = document.getElementById('Lv3-btn');
@@ -18,8 +17,6 @@ class Game {
 
         this.click = new Audio('./sounds/click.mp3');
         this.electricity = new Audio('./sounds/electricity.wav');
-        this.fail = new Audio('./sounds/fail.mp3');
-        this.gameMusic = new Audio('./sounds/game.mp3');
     }
 
     _clearLevel() {
@@ -31,7 +28,7 @@ class Game {
 
     _setClick() {
         this.timeRemaining = this.timeLimit;
-        this.currentLevel.unifiedGrid.forEach(p => {
+        this.currentLevel.grid.flat().forEach(p => {
             p && p.element.addEventListener('click', () => {
                 this.click.play();
                 p.angle += 90;
@@ -133,10 +130,6 @@ class Game {
         }
     }
 
-    _updateTimeBar() {
-        const timePercent = Math.round(100 * this.timeRemaining / this.timeLimit);
-        timeBar.value = timePercent;
-    }
 
     startLevel0() {
         gridHTML.style.backgroundImage = "url('./img/tileMetal.png')";
@@ -158,6 +151,34 @@ class Game {
     }
 
     //TODO => REFACTORING
+    _createMap(levelNumber) {
+       switch (levelNumber) {
+           case 1: 
+            this._level1Map();
+            break;
+           case 2: 
+            this._level2Map();
+            break;
+           case 3: 
+            this._level3Map();
+            break;
+           case 4: 
+            this._level4Map();
+            break;
+           case 5: 
+            this._level5Map();
+            break;
+       }
+    }
+
+    _startGame(levelNumber, timeLimit) {
+        gridHTML.style.backgroundImage = "url('./img/tileAqua.png')";
+        this.currentLevel = new Level();
+        this._createMap(levelNumber);
+        this.gameMusic.play();
+        this._setClick();
+        this.currentLevel.startLevel();
+    }
 
     _startLevel1() {
         this.gameMusic.play();
@@ -167,7 +188,6 @@ class Game {
 
         this._level1Map();
 
-        this.currentLevel.unifyGrid();
         this._setClick();
         this.currentLevel.changeState(this.currentLevel.start);
         this._setTimer();
@@ -182,7 +202,6 @@ class Game {
 
         this._level2Map();
 
-        this.currentLevel.unifyGrid();
         this._setClick();
         this.currentLevel.changeState(this.currentLevel.start);
         this._setTimer();
@@ -198,12 +217,9 @@ class Game {
 
         this._level3Map();
 
-        this.currentLevel.unifyGrid();
         this._setClick();
-        this.currentLevel.changeState(this.currentLevel.start);
         this._setTimer();
-
-        this.currentLevel.updateImgs();
+        this.currentLevel.startLevel();
     }
 
     _startLevel4() {
@@ -214,7 +230,6 @@ class Game {
 
         this._level4Map();
 
-        this.currentLevel.unifyGrid();
         this._setClick();
         this.currentLevel.changeState(this.currentLevel.start);
         this._setTimer();
@@ -230,7 +245,6 @@ class Game {
 
         this._level5Map();
 
-        this.currentLevel.unifyGrid();
         this._setClick();
         this.currentLevel.changeState(this.currentLevel.start);
         this._setTimer();
