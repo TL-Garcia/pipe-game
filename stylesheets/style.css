@@ -1,19 +1,14 @@
-body {
-    font-family: Copperplate ;
-    line-height: 1.7rem;
+body,
+html {
+    height: 100%;
+    font-family: Copperplate;
 }
 
-#menu {
-    z-index: 3;
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    background-color: rgba(50, 50, 50, 0.99);
-    height: 104%;
-    width: 100%;
-    color: white;
+a {
+    color: black;
 }
+
+/*OPENING SCREEN*/
 
 #mute {
     height: 1.8rem;
@@ -23,30 +18,62 @@ body {
     left: 5rem;
 }
 
-#mute img{
+#mute img {
     height: 1.5rem;
 }
 
-#menu p {
-    margin-bottom: 1.5rem;
+.opening-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 3;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    background-color: rgb(50, 50, 50);
+    height: 104%;
+    width: 100%;
+    color: white;
 }
 
-#menu > article {
+.opening-screen__article {
     width: 40%;
-    margin-top: 6rem;
-    margin-left: 22rem;
+    margin-bottom: 2.5rem;
 }
 
-#menu h1 {
+.opening-screen__title {
     margin-bottom: 3rem;
+}
+
+.opening-screen__btns-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.btn {
+    background-color: white;
+    border: none;
+}
+
+.btn:hover {
+    background-color: yellow;
+    box-shadow: 1px 1px 3px 1px chartreuse;
+    color: purple;
+}
+
+.main-btn {
+    border-radius: 8px;
+    padding: 5px 14px;
+}
+
+.opening-screen__animation-wrapper {
+    height: 20rem;
 }
 
 #intro-animation {
     display: none;
     height: 20rem;
-    position: absolute;
-    top: 15rem;
-    left: -1.5rem;
 }
 
 .animated {
@@ -73,12 +100,15 @@ body {
     animation-name: fadeOutDown;
 }
 
-.game {
-    display: flex;
+#game {
+    height: 90vh;
+    background-color: #0d8fff;
 }
 
 .center {
-    background-color: #0d8fff;
+    height: 90vh;
+    position: relative;
+    top: 52px;
 }
 
 
@@ -88,7 +118,7 @@ body {
     top: 15rem;
     left: 13rem;
     border: 1px solid;
-    background-image: url(./img/tile116.png);
+    background-image: url(../img/tile116.png);
     padding: 4rem 1rem;
     color: white;
     text-align: center;
@@ -119,7 +149,7 @@ body {
     padding: 4rem 11rem;
     background-position-x: -1.8rem;
     background-position-y: 7.5rem;
-    background-image: url(./img/machine_grey.png);
+    background-image: url(../img/machine_grey.png);
     background-size: 49rem;
     background-repeat: no-repeat;
 }
@@ -177,6 +207,7 @@ main .row {
 
 /* ASIDE */
 .side {
+    z-index: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -197,9 +228,11 @@ main .row {
 aside {
     width: 17rem;
     padding: 1.5rem;
-    order: 0.02rem solid black;
+    border: 0.02rem solid darkgrey;
+    border-radius: 6px;
     background-color: #DDF305;
 }
+
 
 #level-select {
     display: flex;
@@ -207,12 +240,20 @@ aside {
     font-size: small;
 }
 
-#level-select>btn {}
+level-select__btn {
+    border-radius: 8px;
+    padding: 0.3rem;
+}
+
 
 /* FOOTER */
 
 footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
     background-color: #07F261;
-    height: 3rem;
+    height: 10vh;
     border-top: 0.02rem solid black;
+    padding: 1rem;
 }

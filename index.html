@@ -8,117 +8,109 @@
 
     <title>Pipe Game</title>
 
+    <link rel="stylesheet" href="./stylesheets/normalize.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./stylesheets/style.css">
 </head>
 
 <body>
-    <div id="menu">
+    <section class="opening-screen">
+        <article class="opening-screen__article">
+            <h1 class="opening-screen__title">Welcome to the pipe game</h1>
 
-        <img src="./img/doc_animation.gif" alt="" srcset="" id="intro-animation">
-
-        <article>
-            <h1>Welcome to the pipe game</h1>
-            <p>
-                After countless years of experiments you have finally found it! The key to eternal life lies at your
-                fingertips.
-            </p>
-            <p>
-                With the aid of your not-so-handsome assistant you only need to make the final preparations before the
-                lightning storm strikes
-            </p>
-
-            <button type="button" id="intro-button">Intro</button>
-            <button type="button" id="menu-button">Let the experiment begin</button>
+            <div class="opening-screen__btns-wrapper">
+                <button type="button" class="opening-screen__btn btn main-btn" id="intro-btn">Intro</button>
+                <button type="button" class="opening-screen__btn btn main-btn" id="start-game-btn">Let the experiment begin</button>
+            </div>
         </article>
-    </div>
+        <div class="opening-screen__animation-wrapper">
+            <img src="./img/doc_animation.gif" alt="" srcset="" id="intro-animation">
+        </div>
+    </section>
 
     <div id="game">
-        <div class="center">
-            <div class="side">
-                <h3>TIME LEFT</h3>
-                <progress id="time-bar" value="100" max="100"></progress>
-                <aside>
-                    <div id="level-select">
-                        <button id="Lv1-btn" type="button">Lv 1</button>
-                        <button id="Lv2-btn" type="button">Lv 2</button>
-                        <button id="Lv3-btn" type="button">Lv 3</button>
-                        <button id="Lv4-btn" type="button">Lv 4</button>
-                        <button id="Lv5-btn" type="button">Lv 5</button>
+        <section class="side">
+            <h3>TIME LEFT</h3>
+            <progress id="time-bar" value="100" max="100"></progress>
+            <aside>
+                <div id="level-select">
+                    <button class="btn level-select__btn" id="Lv1-btn" type="button">Lv 1</button>
+                    <button class="btn level-select__btn" id="Lv2-btn" type="button">Lv 2</button>
+                    <button class="btn level-select__btn" id="Lv3-btn" type="button">Lv 3</button>
+                    <button class="btn level-select__btn" id="Lv4-btn" type="button">Lv 4</button>
+                    <button class="btn level-select__btn" id="Lv5-btn" type="button">Lv 5</button>
+                </div>
+            </aside>
+        </section>
+
+        <main class="center">
+            <div id="machine">
+                <div id="doc">
+                    <img src="./img/doc.png" alt="">
+                </div>
+                <div class="animated slideInDown" id="popup-menu">
+                    <h3></h3>
+                    <button class="btn main-btn" type="button" id="next-button">NEXT LEVEL</button>
+                    <button class="btn main-btn" type="button" id="try-again-button">TRY AGAIN</button>
+                </div>
+                <div class="grid">
+                    <div class="row">
+                        <div class="square x0y0"></div>
+                        <div class="square x1y0"></div>
+                        <div class="square x2y0"></div>
+                        <div class="square x3y0"></div>
+                        <div class="square x4y0"></div>
+                        <div class="square x5y0"></div>
                     </div>
-                </aside>
+                    <div class="row">
+                        <div class="square x0y1"></div>
+                        <div class="square x1y1"></div>
+                        <div class="square x2y1"></div>
+                        <div class="square x3y1"></div>
+                        <div class="square x4y1"></div>
+                        <div class="square x5y1"></div>
+                    </div>
+                    <div class="row">
+                        <div class="square x0y2"></div>
+                        <div class="square x1y2"></div>
+                        <div class="square x2y2"></div>
+                        <div class="square x3y2"></div>
+                        <div class="square x4y2"></div>
+                        <div class="square x5y2"></div>
+                    </div>
+                    <div class="row">
+                        <div class="square x0y3"></div>
+                        <div class="square x1y3"></div>
+                        <div class="square x2y3"></div>
+                        <div class="square x3y3"></div>
+                        <div class="square x4y3"></div>
+                        <div class="square x5y3"></div>
+                    </div>
+                    <div class="row">
+                        <div class="square x0y4"></div>
+                        <div class="square x1y4"></div>
+                        <div class="square x2y4"></div>
+                        <div class="square x3y4"></div>
+                        <div class="square x4y4"></div>
+                        <div class="square x5y4"></div>
+                    </div>
+                    <div class="row">
+                        <div class="square x0y5"></div>
+                        <div class="square x1y5"></div>
+                        <div class="square x2y5"></div>
+                        <div class="square x3y5"></div>
+                        <div class="square x4y5"></div>
+                        <div class="square x5y5"></div>
+                    </div>
+                </div>
             </div>
-            <main>
 
-                <div id="machine">
-                    <div id="doc">
-                        <img src="./img/doc.png" alt="">
-                    </div>
-                    <div class="animated slideInDown" id="popup-menu">
-                        <h3></h3>
-                        <button type="button" id="next-button">NEXT LEVEL</button>
-                        <button type="button" id="try-again-button">TRY AGAIN</button>
-                    </div>
-                    <div class="grid">
-                        <div class="row">
-                            <div class="square x0y0"></div>
-                            <div class="square x1y0"></div>
-                            <div class="square x2y0"></div>
-                            <div class="square x3y0"></div>
-                            <div class="square x4y0"></div>
-                            <div class="square x5y0"></div>
-                        </div>
-                        <div class="row">
-                            <div class="square x0y1"></div>
-                            <div class="square x1y1"></div>
-                            <div class="square x2y1"></div>
-                            <div class="square x3y1"></div>
-                            <div class="square x4y1"></div>
-                            <div class="square x5y1"></div>
-                        </div>
-                        <div class="row">
-                            <div class="square x0y2"></div>
-                            <div class="square x1y2"></div>
-                            <div class="square x2y2"></div>
-                            <div class="square x3y2"></div>
-                            <div class="square x4y2"></div>
-                            <div class="square x5y2"></div>
-                        </div>
-                        <div class="row">
-                            <div class="square x0y3"></div>
-                            <div class="square x1y3"></div>
-                            <div class="square x2y3"></div>
-                            <div class="square x3y3"></div>
-                            <div class="square x4y3"></div>
-                            <div class="square x5y3"></div>
-                        </div>
-                        <div class="row">
-                            <div class="square x0y4"></div>
-                            <div class="square x1y4"></div>
-                            <div class="square x2y4"></div>
-                            <div class="square x3y4"></div>
-                            <div class="square x4y4"></div>
-                            <div class="square x5y4"></div>
-                        </div>
-                        <div class="row">
-                            <div class="square x0y5"></div>
-                            <div class="square x1y5"></div>
-                            <div class="square x2y5"></div>
-                            <div class="square x3y5"></div>
-                            <div class="square x4y5"></div>
-                            <div class="square x5y5"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="monster">
-                    <img src="./img/monster.png" alt="">
-                </div>
-            </main>
-        </div>
+            <div id="monster">
+                <img src="./img/monster.png" alt="">
+            </div>
+        </main>
         <footer>
-
         </footer>
     </div>
 

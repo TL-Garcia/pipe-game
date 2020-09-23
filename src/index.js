@@ -1,15 +1,18 @@
 const theme = new Audio('./sounds/theme.mp3');
-const introBtn = document.getElementById('intro-button');
+const thunder = new Audio('./sounds/electricity.wav');
+
+const introBtn = document.getElementById('intro-btn');
 const animation = document.getElementById('intro-animation');
+const startGameBtn = document.getElementById('start-game-btn');
+const openingScreen = document.querySelector('.opening-screen');
 
-const menuBtn = document.getElementById('menu-button');
-const menu = document.getElementById('menu');
-
-menuBtn.addEventListener('click', () => {
-    menu.style.display = 'none';
+startGameBtn.addEventListener('click', () => {
+    theme.pause();
+    thunder.play();
+    openingScreen.remove();
     const game = new Game();
     game.startLevel0();
-})
+});
 
 introBtn.addEventListener('click', () => {
     theme.play();
