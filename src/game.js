@@ -13,9 +13,6 @@ const lvl5Btn = document.getElementById('Lv5-btn');
 
 class Game {
     constructor() {
-        this.currentLevel;
-        this.timeLimit;
-        this.intervalID;
         this.levelNumber = 0;
         this._setLvlSelectorClick();
 
@@ -159,6 +156,8 @@ class Game {
         });
 
     }
+
+    //TODO => REFACTORING
 
     _startLevel1() {
         this.gameMusic.play();
