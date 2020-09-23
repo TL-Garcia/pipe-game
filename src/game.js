@@ -28,7 +28,7 @@ class Game {
     _clearLevel() {
         this._clearClick();
         this.currentLevel = null;
-        const squares = document.querySelectorAll('.square');
+        const squares = document.querySelectorAll('.grid__square');
         squares.forEach(sq => sq.innerHTML = '');
     }
 
@@ -94,7 +94,7 @@ class Game {
             clearInterval(this.intervalID);
             popup.style.display = 'block';
             popupTitle.innerText = 'You completed the level';
-            nextBtn.innerText = 'NEXT LEVEL'
+            nextBtn.innerText = 'NEXT LEVEL';
             nextBtn.style.display = 'inline';
             tryAgainBtn.style.display = 'none';
         }

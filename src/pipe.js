@@ -9,7 +9,7 @@ class Pipe {
             e: false
         };
 
-        this.element = document.querySelector(`.square.x${this.x}y${this.y}`)
+        this.element = document.querySelector(`.grid__square.x${this.x}y${this.y}`);
 
         this.angle = angle;
 
