@@ -31,7 +31,7 @@ class Game {
 
     _setClick() {
         this.timeRemaining = this.timeLimit;
-        this.currentLevel.unifiedGrid.forEach(p => {
+        this.currentLevel.grid.flat().forEach(p => {
             p && p.element.addEventListener('click', () => {
                 this.click.play();
                 p.angle += 90;
@@ -167,7 +167,6 @@ class Game {
 
         this._level1Map();
 
-        this.currentLevel.unifyGrid();
         this._setClick();
         this.currentLevel.changeState(this.currentLevel.start);
         this._setTimer();
@@ -182,7 +181,6 @@ class Game {
 
         this._level2Map();
 
-        this.currentLevel.unifyGrid();
         this._setClick();
         this.currentLevel.changeState(this.currentLevel.start);
         this._setTimer();
@@ -198,7 +196,6 @@ class Game {
 
         this._level3Map();
 
-        this.currentLevel.unifyGrid();
         this._setClick();
         this.currentLevel.changeState(this.currentLevel.start);
         this._setTimer();
@@ -214,7 +211,6 @@ class Game {
 
         this._level4Map();
 
-        this.currentLevel.unifyGrid();
         this._setClick();
         this.currentLevel.changeState(this.currentLevel.start);
         this._setTimer();
@@ -230,7 +226,6 @@ class Game {
 
         this._level5Map();
 
-        this.currentLevel.unifyGrid();
         this._setClick();
         this.currentLevel.changeState(this.currentLevel.start);
         this._setTimer();

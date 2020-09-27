@@ -9,7 +9,6 @@ class Level {
             [null, null, null, null, null, null],
         ];
 
-        this.unifiedGrid = [] 
 
         this.path = [];
 
@@ -38,9 +37,6 @@ class Level {
         this.grid[y][x] = new TPipe(x, y, angle);
     }
 
-    unifyGrid() {
-        this.unifiedGrid = [].concat.apply([], this.grid)
-    }
 
 
 
@@ -175,6 +171,6 @@ class Level {
     }
 
     updateImgs() {
-            this.unifiedGrid.forEach(p => p && p.updateImg());
+            this.grid.flat().forEach(p => p && p.updateImg());
     }
 }
