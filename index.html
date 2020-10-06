@@ -28,26 +28,29 @@
         </div>
     </section>
 
-    <div id="game">
-        <section class="side">
-            <h3>TIME LEFT</h3>
-            <progress id="time-bar" value="100" max="100"></progress>
-            <aside>
-                <div id="level-select">
-                    <button class="btn level-select__btn" id="Lv1-btn" type="button">Lv 1</button>
-                    <button class="btn level-select__btn" id="Lv2-btn" type="button">Lv 2</button>
-                    <button class="btn level-select__btn" id="Lv3-btn" type="button">Lv 3</button>
-                    <button class="btn level-select__btn" id="Lv4-btn" type="button">Lv 4</button>
-                    <button class="btn level-select__btn" id="Lv5-btn" type="button">Lv 5</button>
-                </div>
-            </aside>
-        </section>
+    <section class="side">
+        <h3>TIME LEFT</h3>
+        <progress id="time-bar" value="100" max="100"></progress>
+        <aside>
+            <div id="level-select">
+                <button class="btn level-select__btn" id="Lv1-btn" type="button">Lv 1</button>
+                <button class="btn level-select__btn" id="Lv2-btn" type="button">Lv 2</button>
+                <button class="btn level-select__btn" id="Lv3-btn" type="button">Lv 3</button>
+                <button class="btn level-select__btn" id="Lv4-btn" type="button">Lv 4</button>
+                <button class="btn level-select__btn" id="Lv5-btn" type="button">Lv 5</button>
+            </div>
+        </aside>
+    </section>
 
+    <div id="game">
         <main class="center">
+            <div id="doc">
+                <img src="./img/doc.png" alt="">
+            </div>
+
             <div id="machine">
-                <div id="doc">
-                    <img src="./img/doc.png" alt="">
-                </div>
+
+
                 <div class="animated slideInDown" id="popup-menu">
                     <h3></h3>
                     <button class="btn main-btn" type="button" id="next-button">NEXT LEVEL</button>
