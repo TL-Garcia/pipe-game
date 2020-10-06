@@ -107,17 +107,23 @@ a {
 #game {
     height: 90vh;
     background-color: #0d8fff;
-}
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
 
-.center {
+    /* background-image: url(../img/machine_grey.png);
+    background-size: 49rem;
+    background-repeat: no-repeat;
+    background-position-x: -1.8rem; */
 }
-
 
 /* MAIN */
+.center {
+    display: flex;
+    align-items: flex-end;
+}
 #popup-menu {
     width: 26rem;
-    top: 15rem;
-    left: 13rem;
     border: 1px solid;
     background-image: url(../img/tile116.png);
     padding: 4rem 1rem;
@@ -136,30 +142,21 @@ a {
 }
 
 
-
 #machine {
-    position: absolute;
-    left: 14rem;
-    top: -10.5rem;
-    margin-top: 3.5rem;
-    margin-left: 4rem;
-    padding: 4rem 11rem;
-    background-position-x: -1.8rem;
-    background-position-y: 7.5rem;
+    /*     padding: 4rem 11rem;
+    background-position-y: 7.5rem; */
     background-image: url(../img/machine_grey.png);
-    background-size: 49rem;
     background-repeat: no-repeat;
-}
-
-main {
-    height: 35rem;
+    height: 554px;
+    width: 908px;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 }
 
 .grid {
-    margin-top: 6rem;
+    width: 480px;
+    height: 480px;
     box-shadow: 0px -1px 11px 3px #07F261;
     z-index: 1;
     display: grid;
@@ -174,20 +171,12 @@ main {
     border: 0.02rem solid black;
 }
 
-#doc {
-    position: absolute;
-    top: 31rem;
-    left: -10rem;
-}
 
 #doc>img {
     height: 11rem;
 }
 
 #monster {
-    position: absolute;
-    top: 19rem;
-    left: 64rem;
     box-shadow: 0px 19px 20px 2px #07F261;
 }
 
