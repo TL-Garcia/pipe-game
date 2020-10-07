@@ -1,3 +1,5 @@
+const PIPES_IMG_PATH = './img/pipes/';
+
 class Pipe {
     constructor(posX, posY, angle) {
         this.x = posX;
@@ -35,7 +37,7 @@ class StraightPipe extends Pipe {
     constructor(posX, posY, angle) {
         super(posX, posY, angle);
 
-        this.element.innerHTML = '<div class="pipe"><img class="straight-pipe-img" src="./img/pipe_straight.png" alt=""></div>';
+        this.element.innerHTML = `<div class="pipe"><img class="straight-pipe-img" src=${PIPES_IMG_PATH}pipe_straight.png" alt=""></div>`;
         this.img = this.element.querySelector('.pipe > img');
 
         this.direction = {
@@ -52,9 +54,9 @@ class StraightPipe extends Pipe {
 
     updateImg() {
         if (this.active) {
-            this.img.src = './img/pipe_straight_active.png';
+            this.img.src = `${PIPES_IMG_PATH}pipe_straight_active.png`;
         } else {
-            this.img.src = './img/pipe_straight.png';
+            this.img.src = `${PIPES_IMG_PATH}pipe_straight.png`;
         }
     }
 }
@@ -64,7 +66,7 @@ class CurvedPipe extends Pipe {
     constructor(posX, posY, angle) {
         super(posX, posY, angle);
 
-        this.element.innerHTML = '<div class="pipe"><img src="./img/pipe_curve.png" alt=""></div>';
+        this.element.innerHTML = `<div class="pipe"><img src=${PIPES_IMG_PATH}"pipe_curve.png" alt=""></div>`;
 
         this.img = this.element.querySelector('.pipe > img');
 
@@ -83,9 +85,9 @@ class CurvedPipe extends Pipe {
 
     updateImg() {
         if (this.active) {
-            this.img.src = './img/pipe_curve_active.png';
+            this.img.src = `${PIPES_IMG_PATH}pipe_curve_active.png`;
         } else {
-            this.img.src = './img/pipe_curve.png';
+            this.img.src = `${PIPES_IMG_PATH}pipe_curve.png`;
         }
     }
 }
@@ -95,7 +97,7 @@ class TPipe extends Pipe {
     constructor(posX, posY, angle) {
         super(posX, posY, angle);
 
-        this.element.innerHTML = '<div class="pipe"><img src="./img/pipe_t.png" alt=""></div>';
+        this.element.innerHTML = `<div class="pipe"><img src=${PIPES_IMG_PATH}"pipe_t.png" alt=""></div>`;
         this.img = this.element.querySelector('.pipe > img');
 
         this.direction = {
@@ -112,9 +114,9 @@ class TPipe extends Pipe {
 
     updateImg() {
         if (this.active) {
-            this.img.src = './img/pipe_t_active.png';
+            this.img.src = `${PIPES_IMG_PATH}pipe_t_active.png`;
         } else {
-            this.img.src = './img/pipe_t.png';
+            this.img.src = `${PIPES_IMG_PATH}pipe_t.png`;
         }
     }
 }
