@@ -5,11 +5,7 @@ const tryAgainBtn = document.querySelector('#try-again-button');
 const popupButton = document.getElementById('popup-button');
 const gridHTML = document.querySelector('.grid');
 const timeBar = document.getElementById('time-bar');
-const lvl1Btn = document.getElementById('Lv1-btn');
-const lvl2Btn = document.getElementById('Lv2-btn');
-const lvl3Btn = document.getElementById('Lv3-btn');
-const lvl4Btn = document.getElementById('Lv4-btn');
-const lvl5Btn = document.getElementById('Lv5-btn');
+const toLevelBtns = document.querySelectorAll('.level-select__btn');
 
 class Game {
 	constructor() {
@@ -47,25 +43,9 @@ class Game {
 	}
 
 	_setLvlSelectorClick() {
-		lvl1Btn.addEventListener('click', () => {
-			this._toLevel(1);
-		});
-
-		lvl2Btn.addEventListener('click', () => {
-			this._toLevel(2);
-		});
-
-		lvl3Btn.addEventListener('click', () => {
-			this._toLevel(3);
-		});
-
-		lvl4Btn.addEventListener('click', () => {
-			this._toLevel(4);
-		});
-
-		lvl5Btn.addEventListener('click', () => {
-			this._toLevel(5);
-		});
+        toLevelBtns.forEach(btn => {
+            btn.addEventListener('click', () => this._toLevel(btn.value));
+        });
 	}
 
 	_clearClick() {
