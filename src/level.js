@@ -9,8 +9,6 @@ class Level {
             [null, null, null, null, null, null],
         ];
 
-        this.unifiedGrid = [] 
-
         this.path = [];
 
         this.activationSound = new Audio('./sounds/activation.wav');
@@ -37,12 +35,6 @@ class Level {
     addT(x, y, angle) {
         this.grid[y][x] = new TPipe(x, y, angle);
     }
-
-    unifyGrid() {
-        this.unifiedGrid = [].concat.apply([], this.grid)
-    }
-
-
 
     changeState(target) {
         const outcome = this._decideOutcome(target);
@@ -175,6 +167,6 @@ class Level {
     }
 
     updateImgs() {
-            this.unifiedGrid.forEach(p => p && p.updateImg());
+            this.grid.flat().forEach(p => p && p.updateImg());
     }
 }

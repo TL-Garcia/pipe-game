@@ -31,7 +31,7 @@ class Game {
 
 	_setClick() {
 		this.timeRemaining = this.timeLimit;
-		this.currentLevel.unifiedGrid.forEach((p) => {
+		this.currentLevel.grid.flat().forEach((p) => {
 			p &&
 				p.element.addEventListener('click', () => {
 					this.click.play();
@@ -159,7 +159,14 @@ class Game {
 		});
 	}
 
-	//TODO => REFACTORING
+    startLevel(number) {
+        this.gameMusic.play();
+        this.currentLevel = new Level();
+        this.timeLimit = 100000;
+        gridHTML.style.backgroundImage = "url('./img/tileAqua.png')";
+        
+        loadMap[number](this);
+    }
 
 	_startLevel1() {
 		this.gameMusic.play();
@@ -169,7 +176,6 @@ class Game {
 
 		loadMap[1](this);
 
-		this.currentLevel.unifyGrid();
 		this._setClick();
 		this.currentLevel.changeState(this.currentLevel.start);
 		this._setTimer();
@@ -184,7 +190,6 @@ class Game {
 
 		loadMap[2](this);
 
-		this.currentLevel.unifyGrid();
 		this._setClick();
 		this.currentLevel.changeState(this.currentLevel.start);
 		this._setTimer();
@@ -200,7 +205,6 @@ class Game {
 
 		loadMap[3](this);
 
-		this.currentLevel.unifyGrid();
 		this._setClick();
 		this.currentLevel.changeState(this.currentLevel.start);
 		this._setTimer();
@@ -216,7 +220,6 @@ class Game {
 
 		loadMap[4](this);
 
-		this.currentLevel.unifyGrid();
 		this._setClick();
 		this.currentLevel.changeState(this.currentLevel.start);
 		this._setTimer();
@@ -232,7 +235,6 @@ class Game {
 
 		loadMap[5](this);
 
-		this.currentLevel.unifyGrid();
 		this._setClick();
 		this.currentLevel.changeState(this.currentLevel.start);
 		this._setTimer();
