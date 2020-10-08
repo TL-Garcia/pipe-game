@@ -28,7 +28,6 @@ class Game {
 		this.currentLevel.grid.flat().forEach((p) => {
 			p && p.element.addEventListener('click', () => {
 					this.click.play();
-					//p.angle += 90;
 					p.rotate();
 					this.currentLevel.changeState(p);
 					this.currentLevel.updateImgs();
