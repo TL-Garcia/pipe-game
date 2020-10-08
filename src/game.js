@@ -115,23 +115,7 @@ class Game {
 		clearInterval(this.intervalID);
 		popup.style.display = 'none';
 
-		switch (this.levelNumber) {
-			case 1:
-				this._startLevel1();
-				break;
-			case 2:
-				this._startLevel2();
-				break;
-			case 3:
-				this._startLevel3();
-				break;
-			case 4:
-				this._startLevel4();
-				break;
-			case 5:
-				this._startLevel5();
-				break;
-		}
+        this.startLevel(this.levelNumber);
 	}
 
 	_updateTimeBar() {
@@ -141,7 +125,7 @@ class Game {
 		timeBar.value = timePercent;
 	}
 
-	startLevel0() {
+	startWelcome() {
 		gridHTML.style.backgroundImage = "url('./img/tileMetal.png')";
 		popup.style.display = 'block';
 		popupTitle.innerText = 'Welcome to the pipe game';
@@ -166,79 +150,10 @@ class Game {
         gridHTML.style.backgroundImage = "url('./img/tileAqua.png')";
         
         loadMap[number](this);
+
+        this._setClick();
+		this.currentLevel.changeState(this.currentLevel.start);
+		this._setTimer();
+		this.currentLevel.updateImgs();
     }
-
-	_startLevel1() {
-		this.gameMusic.play();
-		this.currentLevel = new Level();
-		this.timeLimit = 2000;
-		gridHTML.style.backgroundImage = "url('./img/tileAqua.png')";
-
-		loadMap[1](this);
-
-		this._setClick();
-		this.currentLevel.changeState(this.currentLevel.start);
-		this._setTimer();
-		this.currentLevel.updateImgs();
-	}
-
-	_startLevel2() {
-		this.gameMusic.play();
-		this.currentLevel = new Level();
-		this.timeLimit = 4500;
-		gridHTML.style.backgroundImage = "url('./img/tileAqua.png')";
-
-		loadMap[2](this);
-
-		this._setClick();
-		this.currentLevel.changeState(this.currentLevel.start);
-		this._setTimer();
-
-		this.currentLevel.updateImgs();
-	}
-
-	_startLevel3() {
-		this.gameMusic.play();
-		this.currentLevel = new Level();
-		this.timeLimit = 5500;
-		gridHTML.style.backgroundImage = "url('./img/tileAqua.png')";
-
-		loadMap[3](this);
-
-		this._setClick();
-		this.currentLevel.changeState(this.currentLevel.start);
-		this._setTimer();
-
-		this.currentLevel.updateImgs();
-	}
-
-	_startLevel4() {
-		this.gameMusic.play();
-		this.currentLevel = new Level();
-		this.timeLimit = 5800;
-		gridHTML.style.backgroundImage = "url('./img/tileAqua.png')";
-
-		loadMap[4](this);
-
-		this._setClick();
-		this.currentLevel.changeState(this.currentLevel.start);
-		this._setTimer();
-
-		this.currentLevel.updateImgs();
-	}
-
-	_startLevel5() {
-		this.gameMusic.play();
-		this.currentLevel = new Level();
-		this.timeLimit = 7000;
-		gridHTML.style.backgroundImage = "url('./img/tileAqua.png')";
-
-		loadMap[5](this);
-
-		this._setClick();
-		this.currentLevel.changeState(this.currentLevel.start);
-		this._setTimer();
-
-		this.currentLevel.updateImgs();
-	}
 }

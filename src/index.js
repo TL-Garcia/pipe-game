@@ -11,7 +11,7 @@ startGameBtn.addEventListener('click', () => {
     thunder.play();
     openingScreen.remove();
     const game = new Game();
-    game.startLevel0();
+    game.startWelcome();
 });
 
 introBtn.addEventListener('click', () => {
