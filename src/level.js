@@ -1,5 +1,6 @@
 class Level {
-    constructor() {
+    constructor(timeLimit) {
+        this.timeRemaining = timeLimit;
         this.grid = [
             [null, null, null, null, null, null],
             [null, null, null, null, null, null],
@@ -11,8 +12,21 @@ class Level {
 
         this.path = [];
 
+
         this.activationSound = new Audio('./sounds/activation.wav');
     }
+
+
+	_setTimer() {
+		this.intervalID = setInterval(() => {
+			this.timeRemaining--;
+            //this._updateTimeBar();
+			if (this.timeRemaining <= 0) {
+				//this._gameOver();
+				clearInterval(this.intervalID);
+            }
+		}, 1);
+	}
 
     setStart(x, y) {
         this.start = this.grid[y][x];
@@ -79,7 +93,7 @@ class Level {
 
             const neighboursPrecedingTarget = activeNeighbours.filter(n => {
                 return (this.path.indexOf(n) < targetIndex);
-            })
+            });
 
             if (neighboursPrecedingTarget.length) {
                 return ['pass', inactiveNeighbours];
@@ -98,7 +112,7 @@ class Level {
     }
 
     _isTargetActive(target) {
-        const isTargetOnPath = (this.path.indexOf(target) !== -1)
+        const isTargetOnPath = (this.path.indexOf(target) !== -1);
 
         if (isTargetOnPath === target.active) {
             return target.active;
@@ -148,7 +162,7 @@ class Level {
                     if (neighbour && neighbour.direction.e) neighbours.push(neighbour);
                     break;
             }
-        })
+        });
 
         return neighbours;
     }

@@ -4,7 +4,6 @@ const nextBtn = document.querySelector('#next-button');
 const tryAgainBtn = document.querySelector('#try-again-button');
 const popupButton = document.getElementById('popup-button');
 const gridHTML = document.querySelector('.grid');
-const timeBar = document.getElementById('time-bar');
 const toLevelBtns = document.querySelectorAll('.level-select__btn');
 
 class Game {
@@ -26,12 +25,10 @@ class Game {
 	}
 
 	_setClick() {
-		this.timeRemaining = this.timeLimit;
 		this.currentLevel.grid.flat().forEach((p) => {
-			p &&
-				p.element.addEventListener('click', () => {
+			p && p.element.addEventListener('click', () => {
 					this.click.play();
-					p.angle += 90;
+					//p.angle += 90;
 					p.rotate();
 					this.currentLevel.changeState(p);
 					this.currentLevel.updateImgs();
@@ -52,16 +49,6 @@ class Game {
 		// NEEDS TO REFERENCE CLICK EVENT BY NAME
 	}
 
-	_setTimer() {
-		this.intervalID = setInterval(() => {
-			this.timeRemaining--;
-			this._updateTimeBar();
-			if (this.timeRemaining <= 0) {
-				this._gameOver();
-				clearInterval(this.intervalID);
-			}
-		}, 1);
-	}
 
 	_levelComplete() {
 		if (this.currentLevel.end.active && this.currentLevel.end.direction.e) {
@@ -125,15 +112,16 @@ class Game {
 
     startLevel(number) {
         this.gameMusic.play();
-        this.currentLevel = new Level();
-        this.timeLimit = 100000;
+        //change param for timeLimit
+        this.currentLevel = new Level(99999);
+        //this should be inside the level
+        this.currentLevel._setTimer();
         gridHTML.style.backgroundImage = "url('./img/tileAqua.png')";
         
         loadMap[number](this);
 
         this._setClick();
 		this.currentLevel.changeState(this.currentLevel.start);
-		this._setTimer();
 		this.currentLevel.updateImgs();
     }
 }

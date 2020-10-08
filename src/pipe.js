@@ -2,6 +2,7 @@ const PIPES_IMG_PATH = './img/pipes/';
 
 class Pipe {
     constructor(posX, posY, angle) {
+        this.active = false;
         this.x = posX;
         this.y = posY;
         this.direction = {
@@ -10,33 +11,29 @@ class Pipe {
             s: false,
             e: false
         };
-
         this.element = document.querySelector(`.grid__square.x${this.x}y${this.y}`);
-
-        this.angle = angle;
-
-        this.active = false;
-
+        this.angle = 0;
     }
 
-    rotate() {
-        if (this.angle === 360) this.angle = 0;
+    rotate(angle = 90) {
+        for(let turns = angle / 90; turns > 0; turns--) {
+            this.angle += 90;
+            if (this.angle === 360) this.angle = 0;
 
-        this.element.style.transform = `rotate(${this.angle}deg)`;
+            this.element.style.transform = `rotate(${this.angle}deg)`;
 
-        const temp = this.direction.n;
-        this.direction.n = this.direction.w;
-        this.direction.w = this.direction.s;
-        this.direction.s = this.direction.e;
-        this.direction.e = temp;
+            const temp = this.direction.n;
+            this.direction.n = this.direction.w;
+            this.direction.w = this.direction.s;
+            this.direction.s = this.direction.e;
+            this.direction.e = temp;
+        }
     }
 }
-
 
 class StraightPipe extends Pipe {
     constructor(posX, posY, angle) {
         super(posX, posY, angle);
-
         this.element.innerHTML = `<div class="pipe"><img class="straight-pipe-img" src=${PIPES_IMG_PATH}pipe_straight.png" alt=""></div>`;
         this.img = this.element.querySelector('.pipe > img');
 
@@ -46,12 +43,10 @@ class StraightPipe extends Pipe {
             s: true,
             e: false
         };
-
-        for (let i = 0; i < this.angle; i += 90) {
-            this.rotate();
-        }
+        this.rotate(angle);
     }
 
+    //this could be refactored if activeImg & normalImg were class properties and updateImg was an inherited method
     updateImg() {
         if (this.active) {
             this.img.src = `${PIPES_IMG_PATH}pipe_straight_active.png`;
@@ -61,13 +56,10 @@ class StraightPipe extends Pipe {
     }
 }
 
-
 class CurvedPipe extends Pipe {
     constructor(posX, posY, angle) {
         super(posX, posY, angle);
-
         this.element.innerHTML = `<div class="pipe"><img src=${PIPES_IMG_PATH}"pipe_curve.png" alt=""></div>`;
-
         this.img = this.element.querySelector('.pipe > img');
 
 
@@ -77,10 +69,7 @@ class CurvedPipe extends Pipe {
             s: false,
             e: true,
         };
-
-        for (let i = 0; i < this.angle; i += 90) {
-            this.rotate();
-        }
+        this.rotate(angle);
     }
 
     updateImg() {
@@ -92,11 +81,9 @@ class CurvedPipe extends Pipe {
     }
 }
 
-
 class TPipe extends Pipe {
     constructor(posX, posY, angle) {
         super(posX, posY, angle);
-
         this.element.innerHTML = `<div class="pipe"><img src=${PIPES_IMG_PATH}"pipe_t.png" alt=""></div>`;
         this.img = this.element.querySelector('.pipe > img');
 
@@ -106,10 +93,7 @@ class TPipe extends Pipe {
             s: true,
             e: true
         };
-
-        for (let i = 0; i < this.angle; i += 90) {
-            this.rotate();
-        }
+        this.rotate(angle);
     }
 
     updateImg() {
