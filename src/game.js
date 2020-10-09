@@ -3,7 +3,6 @@ class Game {
 		this.levelNumber = 0;
 		this._setLvlSelectorClick();
 
-		this.click = new Audio('./sounds/click.mp3');
 		this.electricity = new Audio('./sounds/electricity.wav');
 		this.fail = new Audio('./sounds/fail.mp3');
 		this.gameMusic = new Audio('./sounds/game.mp3');
@@ -19,11 +18,7 @@ class Game {
 	_setClick() {
 		this.currentLevel.grid.flat().forEach((p) => {
 			p &&
-				p.element.addEventListener('click', () => {
-					this.click.play();
-					p.rotate();
-					this.currentLevel._changeState(p);
-					this.currentLevel._updateImgs();
+				p.htmlElement.addEventListener('click', () => {
 					setTimeout(() => {
 						this._levelComplete();
 					}, 50);

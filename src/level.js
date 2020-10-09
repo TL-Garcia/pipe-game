@@ -38,17 +38,19 @@ class Level {
     }
 
     createPipe(x, y, angle, type) {
-        this.grid[y][x] = new type(x, y, angle);
+        const newPipe = new type(x, y, angle);
+        this.grid[y][x] = newPipe;
+
+        newPipe.htmlElement.addEventListener('click', () => {
+            newPipe.handleClick();
+            this._changeState(newPipe);
+        });
     }
 
     startLevel() {
 		this._startCountdown();
 		this._changeState(this.start);
-		this._updateImgs();
-    }
-
-    _updateImgs() {
-            this.grid.flat().forEach(p => p && p.updateImg());
+        this.grid.flat().forEach(p => p && p.updateImg());
     }
 
     _changeState(target) {
@@ -64,6 +66,7 @@ class Level {
                 this.activationSound.play();
                 neighbours.length > 0 && neighbours.forEach(n => this._changeState(n));
 
+                target.updateImg();
                 break;
 
             case 'deactivate':
@@ -74,6 +77,7 @@ class Level {
                     this.path[i].active = false;
                     this.path.pop();
                 }
+                target.updateImg();
                 break;
 
             case 'pass':
