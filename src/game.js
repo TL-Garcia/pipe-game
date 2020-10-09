@@ -26,7 +26,8 @@ class Game {
 
 	_setClick() {
 		this.currentLevel.grid.flat().forEach((p) => {
-			p && p.element.addEventListener('click', () => {
+			p &&
+				p.element.addEventListener('click', () => {
 					this.click.play();
 					p.rotate();
 					this.currentLevel.changeState(p);
@@ -39,15 +40,14 @@ class Game {
 	}
 
 	_setLvlSelectorClick() {
-        toLevelBtns.forEach(btn => {
-            btn.addEventListener('click', () => this._toLevel(btn.value));
-        });
+		toLevelBtns.forEach((btn) => {
+			btn.addEventListener('click', () => this._toLevel(btn.value));
+		});
 	}
 
 	_clearClick() {
 		// NEEDS TO REFERENCE CLICK EVENT BY NAME
 	}
-
 
 	_levelComplete() {
 		if (this.currentLevel.end.active && this.currentLevel.end.direction.e) {
@@ -55,7 +55,6 @@ class Game {
 			this.gameMusic.currentTime = 0;
 			this.electricity.play();
 			this._clearLevel();
-			clearInterval(this.intervalID);
 			popup.style.display = 'block';
 			popupTitle.innerText = 'You completed the level';
 			nextBtn.innerText = 'NEXT LEVEL';
@@ -68,7 +67,7 @@ class Game {
 		this.gameMusic.pause();
 		this.gameMusic.currentTime = 0;
 		this.fail.play();
-		game._clearLevel();
+		this._clearLevel();
 		popup.style.display = 'block';
 		popupTitle.innerText = 'You have failed';
 		nextBtn.style.display = 'none';
@@ -81,7 +80,7 @@ class Game {
 		clearInterval(this.intervalID);
 		popup.style.display = 'none';
 
-        this.startLevel(this.levelNumber);
+		this.startLevel(this.levelNumber);
 	}
 
 	_updateTimeBar() {
@@ -109,18 +108,24 @@ class Game {
 		});
 	}
 
-    startLevel(number) {
-        this.gameMusic.play();
-        //change param for timeLimit
-        this.currentLevel = new Level(99999);
-        //this should be inside the level
-        this.currentLevel._setTimer();
-        gridHTML.style.backgroundImage = "url('./img/tileAqua.png')";
-        
-        loadMap[number](this);
+	startLevel(number) {
+		this.gameMusic.play();
+		//change param for timeLimit
+		this.currentLevel = new Level(100000);
+		//this should be inside the level
+		this.currentLevel._setTimer();
+		const intervalId = setInterval(() => {
+			if (this.currentLevel.isGameOver) {
+				this._gameOver();
+				clearInterval(intervalId);
+			}
+		}, 1);
+		gridHTML.style.backgroundImage = "url('./img/tileAqua.png')";
 
-        this._setClick();
+		loadMap[number](this);
+
+		this._setClick();
 		this.currentLevel.changeState(this.currentLevel.start);
 		this.currentLevel.updateImgs();
-    }
+	}
 }

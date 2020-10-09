@@ -9,21 +9,20 @@ class Level {
             [null, null, null, null, null, null],
             [null, null, null, null, null, null],
         ];
-
         this.path = [];
 
+        this.isGameOver = false;
 
         this.activationSound = new Audio('./sounds/activation.wav');
     }
 
-
 	_setTimer() {
-		this.intervalID = setInterval(() => {
+		const intervalID = setInterval(() => {
 			this.timeRemaining--;
             //this._updateTimeBar();
 			if (this.timeRemaining <= 0) {
-				//this._gameOver();
-				clearInterval(this.intervalID);
+				this._checkGameOver();
+				clearInterval(intervalID);
             }
 		}, 1);
 	}
@@ -48,6 +47,14 @@ class Level {
 
     addT(x, y, angle) {
         this.grid[y][x] = new TPipe(x, y, angle);
+    }
+
+    startLevel() {
+
+    }
+
+    updateImgs() {
+            this.grid.flat().forEach(p => p && p.updateImg());
     }
 
     changeState(target) {
@@ -180,7 +187,7 @@ class Level {
         }
     }
 
-    updateImgs() {
-            this.grid.flat().forEach(p => p && p.updateImg());
+    _checkGameOver() {
+       this.isGameOver = this.timeRemaining <=0 ? true : false;
     }
 }
