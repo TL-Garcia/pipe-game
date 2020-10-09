@@ -37,16 +37,8 @@ class Level {
         this.end = this.grid[y][x];
     }
 
-    addPipe(x, y, angle) {
-        this.grid[y][x] = new StraightPipe(x, y, angle);
-    }
-
-    addCurve(x, y, angle) {
-        this.grid[y][x] = new CurvedPipe(x, y, angle);
-    }
-
-    addT(x, y, angle) {
-        this.grid[y][x] = new TPipe(x, y, angle);
+    createPipe(x, y, angle, type) {
+        this.grid[y][x] = new type(x, y, angle);
     }
 
     startLevel() {

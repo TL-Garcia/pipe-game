@@ -1,10 +1,7 @@
 const theme = new Audio('./sounds/theme.mp3');
 const thunder = new Audio('./sounds/electricity.wav');
 
-const introBtn = document.getElementById('intro-btn');
-const animation = document.getElementById('intro-animation');
-const startGameBtn = document.getElementById('start-game-btn');
-const openingScreen = document.querySelector('.opening-screen');
+const PIPES_IMG_PATH = './img/pipes/';
 
 startGameBtn.addEventListener('click', () => {
     theme.pause();

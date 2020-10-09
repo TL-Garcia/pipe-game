@@ -1,7 +1,5 @@
-const PIPES_IMG_PATH = './img/pipes/';
-
 class Pipe {
-    constructor(posX, posY, angle) {
+    constructor(posX, posY, setPipeClick) {
         this.active = false;
         this.x = posX;
         this.y = posY;
@@ -13,6 +11,8 @@ class Pipe {
         };
         this.element = document.querySelector(`.grid__square.x${this.x}y${this.y}`);
         this.angle = 0;
+
+        this.setPipeClick = setPipeClick;
     }
 
     rotate(angle = 90) {

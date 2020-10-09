@@ -1,11 +1,3 @@
-const popup = document.getElementById('popup-menu');
-const popupTitle = document.querySelector('#popup-menu h3');
-const nextBtn = document.querySelector('#next-button');
-const tryAgainBtn = document.querySelector('#try-again-button');
-const popupButton = document.getElementById('popup-button');
-const gridHTML = document.querySelector('.grid');
-const toLevelBtns = document.querySelectorAll('.level-select__btn');
-
 class Game {
 	constructor() {
 		this.levelNumber = 0;
@@ -31,7 +23,7 @@ class Game {
 					this.click.play();
 					p.rotate();
 					this.currentLevel._changeState(p);
-					this.currentLevel.updateImgs();
+					this.currentLevel._updateImgs();
 					setTimeout(() => {
 						this._levelComplete();
 					}, 50);
