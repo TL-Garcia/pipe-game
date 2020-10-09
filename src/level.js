@@ -16,7 +16,7 @@ class Level {
         this.activationSound = new Audio('./sounds/activation.wav');
     }
 
-	_setTimer() {
+	_startCountdown() {
 		const intervalID = setInterval(() => {
 			this.timeRemaining--;
             //this._updateTimeBar();
@@ -50,14 +50,16 @@ class Level {
     }
 
     startLevel() {
-
+		this._startCountdown();
+		this._changeState(this.start);
+		this._updateImgs();
     }
 
-    updateImgs() {
+    _updateImgs() {
             this.grid.flat().forEach(p => p && p.updateImg());
     }
 
-    changeState(target) {
+    _changeState(target) {
         const outcome = this._decideOutcome(target);
         const action = target === this.start ? 'activate' : outcome[0];
         const neighbours = outcome[1];
@@ -68,7 +70,7 @@ class Level {
                 target.active = true;
                 this.path.push(target);
                 this.activationSound.play();
-                neighbours.length > 0 && neighbours.forEach(n => this.changeState(n));
+                neighbours.length > 0 && neighbours.forEach(n => this._changeState(n));
 
                 break;
 
@@ -83,7 +85,7 @@ class Level {
                 break;
 
             case 'pass':
-                neighbours.length > 0 && neighbours.forEach(n => this.changeState(n));
+                neighbours.length > 0 && neighbours.forEach(n => this._changeState(n));
                 break;
         }
     }

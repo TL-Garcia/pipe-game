@@ -30,7 +30,7 @@ class Game {
 				p.element.addEventListener('click', () => {
 					this.click.play();
 					p.rotate();
-					this.currentLevel.changeState(p);
+					this.currentLevel._changeState(p);
 					this.currentLevel.updateImgs();
 					setTimeout(() => {
 						this._levelComplete();
@@ -112,8 +112,8 @@ class Game {
 		this.gameMusic.play();
 		//change param for timeLimit
 		this.currentLevel = new Level(100000);
-		//this should be inside the level
-		this.currentLevel._setTimer();
+
+
 		const intervalId = setInterval(() => {
 			if (this.currentLevel.isGameOver) {
 				this._gameOver();
@@ -123,9 +123,7 @@ class Game {
 		gridHTML.style.backgroundImage = "url('./img/tileAqua.png')";
 
 		loadMap[number](this);
-
 		this._setClick();
-		this.currentLevel.changeState(this.currentLevel.start);
-		this.currentLevel.updateImgs();
+		this.currentLevel.startLevel();
 	}
 }
