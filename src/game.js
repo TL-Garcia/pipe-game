@@ -25,7 +25,7 @@ class Game {
 		// NEEDS TO REFERENCE CLICK EVENT BY NAME
 	}
 
-	_levelComplete() {
+	_passLevel() {
 			this.gameMusic.pause();
 			this.gameMusic.currentTime = 0;
 			this.electricity.play();
@@ -37,7 +37,7 @@ class Game {
 			tryAgainBtn.style.display = 'none';
 	}
 
-	_gameOver() {
+	_endLevel() {
 		this.gameMusic.pause();
 		this.gameMusic.currentTime = 0;
 		this.fail.play();
@@ -87,15 +87,15 @@ class Game {
 	loadLevel(number) {
 		this.gameMusic.play();
 		//change param for timeLimit
-		this.currentLevel = new Level(1000);
+		this.currentLevel = new Level(10000);
 
 		const intervalId = setInterval(() => {
 			if (this.currentLevel.isLevelComplete || this.currentLevel.isLevelFailed) {
 				clearInterval(intervalId);
-				const {isLevelComplete, isGameOver} = this.currentLevel;
+				const {isLevelComplete, isLevelFailed} = this.currentLevel;
 
-				isGameOver && this._gameOver();
-				isLevelComplete && this._levelComplete();
+				isLevelFailed && this._endLevel();
+				isLevelComplete && this._passLevel();
 			}
 		}, 1);
 		gridHTML.style.backgroundImage = "url('./img/tileAqua.png')";
