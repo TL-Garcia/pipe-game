@@ -11,7 +11,8 @@ class Level {
         ];
         this.path = [];
 
-        this.isGameOver = false;
+        this.isLevelFailed = false;
+        this.isLevelComplete = false; 
 
         this.activationSound = new Audio('./sounds/activation.wav');
     }
@@ -21,7 +22,7 @@ class Level {
 			this.timeRemaining--;
             //this._updateTimeBar();
 			if (this.timeRemaining <= 0) {
-				this._checkGameOver();
+				this._checkLevelFailed();
 				clearInterval(intervalID);
             }
 		}, 1);
@@ -44,6 +45,7 @@ class Level {
         newPipe.htmlElement.addEventListener('click', () => {
             newPipe.handleClick();
             this._changeState(newPipe);
+            this._checkLevelComplete();
         });
     }
 
@@ -185,7 +187,13 @@ class Level {
         }
     }
 
-    _checkGameOver() {
-       this.isGameOver = this.timeRemaining <=0 ? true : false;
+    _checkLevelFailed() {
+       this.isLevelFailed = this.timeRemaining <=0 ? true : false;
+    }
+
+    _checkLevelComplete() {
+        if (this.end.active && this.end.direction.e) {
+            this.isLevelComplete = true;
+        } 
     }
 }

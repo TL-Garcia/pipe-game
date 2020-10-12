@@ -15,17 +15,6 @@ class Game {
 		squares.forEach((sq) => (sq.innerHTML = ''));
 	}
 
-	_setClick() {
-		this.currentLevel.grid.flat().forEach((p) => {
-			p &&
-				p.htmlElement.addEventListener('click', () => {
-					setTimeout(() => {
-						this._levelComplete();
-					}, 50);
-				});
-		});
-	}
-
 	_setLvlSelectorClick() {
 		toLevelBtns.forEach((btn) => {
 			btn.addEventListener('click', () => this._toLevel(btn.value));
@@ -37,7 +26,6 @@ class Game {
 	}
 
 	_levelComplete() {
-		if (this.currentLevel.end.active && this.currentLevel.end.direction.e) {
 			this.gameMusic.pause();
 			this.gameMusic.currentTime = 0;
 			this.electricity.play();
@@ -47,7 +35,6 @@ class Game {
 			nextBtn.innerText = 'NEXT LEVEL';
 			nextBtn.style.display = 'inline';
 			tryAgainBtn.style.display = 'none';
-		}
 	}
 
 	_gameOver() {
@@ -67,9 +54,10 @@ class Game {
 		clearInterval(this.intervalID);
 		popup.style.display = 'none';
 
-		this.startLevel(this.levelNumber);
+		this.loadLevel(this.levelNumber);
 	}
 
+	// THIS SHOULD BE ELSEWHERE
 	_updateTimeBar() {
 		const timePercent = Math.round(
 			(100 * this.timeRemaining) / this.timeLimit
@@ -77,6 +65,7 @@ class Game {
 		timeBar.value = timePercent;
 	}
 
+	//THIS SHOULD BE ELSEWHERE, TRIGGERING game.handleClick()
 	startWelcome() {
 		gridHTML.style.backgroundImage = "url('./img/tileMetal.png')";
 		popup.style.display = 'block';
@@ -95,22 +84,23 @@ class Game {
 		});
 	}
 
-	startLevel(number) {
+	loadLevel(number) {
 		this.gameMusic.play();
 		//change param for timeLimit
-		this.currentLevel = new Level(100000);
-
+		this.currentLevel = new Level(1000);
 
 		const intervalId = setInterval(() => {
-			if (this.currentLevel.isGameOver) {
-				this._gameOver();
+			if (this.currentLevel.isLevelComplete || this.currentLevel.isLevelFailed) {
 				clearInterval(intervalId);
+				const {isLevelComplete, isGameOver} = this.currentLevel;
+
+				isGameOver && this._gameOver();
+				isLevelComplete && this._levelComplete();
 			}
 		}, 1);
 		gridHTML.style.backgroundImage = "url('./img/tileAqua.png')";
 
 		loadMap[number](this);
-		this._setClick();
 		this.currentLevel.startLevel();
 	}
 }
