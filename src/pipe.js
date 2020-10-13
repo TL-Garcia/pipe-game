@@ -39,7 +39,7 @@ class Pipe {
 class StraightPipe extends Pipe {
     constructor(posX, posY, angle) {
         super(posX, posY, angle);
-        this.htmlElement.innerHTML = `<div class="pipe"><img class="straight-pipe-img" src=${PIPES_IMG_PATH}pipe_straight.png" alt=""></div>`;
+        this.htmlElement.innerHTML = `<div class="pipe"><img class="straight-pipe-img" src=${PIPES_IMG_PATH}pipe_straight_alt.png" alt=""></div>`;
         this.img = this.htmlElement.querySelector('.pipe > img');
 
         this.direction = {
@@ -54,9 +54,9 @@ class StraightPipe extends Pipe {
     //this could be refactored if activeImg & normalImg were class properties and updateImg was an inherited method
     updateImg() {
         if (this.active) {
-            this.img.src = `${PIPES_IMG_PATH}pipe_straight_active.png`;
+            this.img.src = `${PIPES_IMG_PATH}pipe_straight_alt_active.png`;
         } else {
-            this.img.src = `${PIPES_IMG_PATH}pipe_straight.png`;
+            this.img.src = `${PIPES_IMG_PATH}pipe_straight_alt.png`;
         }
     }
 }

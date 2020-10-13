@@ -42,11 +42,7 @@ class Level {
         const newPipe = new type(x, y, angle);
         this.grid[y][x] = newPipe;
 
-        newPipe.htmlElement.addEventListener('click', () => {
-            newPipe.handleClick();
-            this._changeState(newPipe);
-            this._checkLevelComplete();
-        });
+        newPipe.htmlElement.addEventListener('click', () => this._handleClick(newPipe));
     }
 
     startLevel() {
@@ -195,5 +191,11 @@ class Level {
         if (this.end.active && this.end.direction.e) {
             this.isLevelComplete = true;
         } 
+    }
+
+    _handleClick(pipe) {
+        pipe.handleClick();
+        this._changeState(pipe);
+        this._checkLevelComplete();
     }
 }
