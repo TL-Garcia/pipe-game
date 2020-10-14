@@ -7,8 +7,8 @@ startGameBtn.addEventListener('click', () => {
     theme.pause();
     thunder.play();
     openingScreen.remove();
-    const game = new Game();
-    game.startWelcome();
+    new Game();
+    renderWelcomeScreen();
 });
 
 introBtn.addEventListener('click', () => {

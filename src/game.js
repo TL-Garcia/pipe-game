@@ -6,6 +6,8 @@ class Game {
 		this.electricity = new Audio('./sounds/electricity.wav');
 		this.fail = new Audio('./sounds/fail.mp3');
 		this.gameMusic = new Audio('./sounds/game.mp3');
+
+		this.handleClicks();
 	}
 
 	_clearLevel() {
@@ -57,14 +59,14 @@ class Game {
 		timeBar.value = timePercent;
 	}
 
-	//THIS SHOULD BE ELSEWHERE, TRIGGERING game.handleClick()
-	//nextBtn shouldn't be the same button as "start game"
-	startWelcome() {
-		renderWelcomeScreen();
-
+	handleClicks() {
 		nextBtn.addEventListener('click', () => {
 			this.levelNumber++;
 			this._toLevel(this.levelNumber);
+		});
+
+		startBtn.addEventListener('click', () => {
+			this._toLevel(1);
 		});
 
 		tryAgainBtn.addEventListener('click', () => {
@@ -77,7 +79,7 @@ class Game {
 		this.gameMusic.play();
 		//change param for timeLimit
 		this.currentLevel = new Level(10000);
-		this._checkIfLevelIsFinnished();
+		this._checkIfLevelIsFinished();
 
 		gridHTML.style.backgroundImage = "url('./img/tileAqua.png')";
 
@@ -85,7 +87,7 @@ class Game {
 		this.currentLevel.startLevel();
 	}
 
-	_checkIfLevelIsFinnished() {
+	_checkIfLevelIsFinished() {
 		const intervalId = setInterval(() => {
 			if (this.currentLevel.levelStatus) {
 				clearInterval(intervalId);
