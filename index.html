@@ -30,7 +30,6 @@
 
     <section class="side">
         <h3>TIME LEFT</h3>
-        <progress id="time-bar" value="100" max="100"></progress>
         <aside>
             <div id="level-select">
                 <button class="btn level-select__btn" id="Lv1-btn" value="1" type="button">Lv 1</button>
@@ -49,8 +48,6 @@
             </div>
 
             <div id="machine">
-
-
                 <div class="animated slideInDown" id="popup-menu">
                     <h3></h3>
                     <button class="btn main-btn" type="button" id="start-button">START GAME</button>
@@ -107,6 +104,9 @@
                         <div class="grid__square x5y5"></div>
                     </div>
                 </div>
+
+
+                <canvas id="progress-bar" width="20" height="150"></canvas>
             </div>
 
             <div id="monster">
@@ -123,6 +123,7 @@
     <script src="./src/pipe.js"></script>
     <script src="./src/level.js"></script>
     <script src="./src/game.js"></script>
+    <script src="./src/progress.js"></script>
     <script src="./src/index.js"></script>
 </body>
 

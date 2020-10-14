@@ -152,6 +152,9 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    /* THIS IS ONLY FOR THE CANVAS */
+        position: relative;
 }
 
 .grid {
@@ -209,10 +212,12 @@ a {
     text-align: center;
 }
 
-#time-bar {
-    margin-bottom: 3rem;
-    height: 3rem;
-    width: 19rem;
+#progress-bar {
+    position: absolute;
+    z-index: 1;
+   /* CHANGE LATER */ 
+    left: 80%;
+    top:20%
 }
 
 aside {
