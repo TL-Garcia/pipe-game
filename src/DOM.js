@@ -12,3 +12,27 @@ const gridHTML = document.querySelector('.grid');
 const introBtn = document.getElementById('intro-btn');
 const animation = document.getElementById('intro-animation');
 const openingScreen = document.querySelector('.opening-screen');
+
+function renderPassScreen() {
+	popup.style.display = 'block';
+	popupTitle.innerText = 'You completed the level';
+	nextBtn.innerText = 'NEXT LEVEL';
+	nextBtn.style.display = 'inline';
+	tryAgainBtn.style.display = 'none';
+}
+
+function renderFailScreen() {
+	popup.style.display = 'block';
+	popupTitle.innerText = 'You have failed';
+	nextBtn.style.display = 'none';
+	tryAgainBtn.style.display = 'inline';
+}
+
+function renderWelcomeScreen() {
+	gridHTML.style.backgroundImage = "url('./img/tileMetal.png')";
+	popup.style.display = 'block';
+	popupTitle.innerText = 'Welcome to the pipe game';
+	nextBtn.style.display = 'inline';
+	nextBtn.innerText = 'START GAME';
+	tryAgainBtn.style.display = 'none';
+}

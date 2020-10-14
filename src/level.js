@@ -14,6 +14,8 @@ class Level {
         this.isLevelFailed = false;
         this.isLevelComplete = false; 
 
+        this.levelStatus = null;
+
         this.activationSound = new Audio('./sounds/activation.wav');
     }
 
@@ -184,12 +186,14 @@ class Level {
     }
 
     _checkLevelFailed() {
-       this.isLevelFailed = this.timeRemaining <=0 ? true : false;
+       if (this.timeRemaining <=0) {
+            this.levelStatus = 'fail';
+       }
     }
 
     _checkLevelComplete() {
         if (this.end.active && this.end.direction.e) {
-            this.isLevelComplete = true;
+            this.levelStatus = 'complete';
         } 
     }
 

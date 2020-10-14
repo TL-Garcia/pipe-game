@@ -25,27 +25,19 @@ class Game {
 		// NEEDS TO REFERENCE CLICK EVENT BY NAME
 	}
 
-	_passLevel() {
-			this.gameMusic.pause();
-			this.gameMusic.currentTime = 0;
-			this.electricity.play();
-			this._clearLevel();
-			popup.style.display = 'block';
-			popupTitle.innerText = 'You completed the level';
-			nextBtn.innerText = 'NEXT LEVEL';
-			nextBtn.style.display = 'inline';
-			tryAgainBtn.style.display = 'none';
-	}
-
-	_endLevel() {
+	_endLevel(status) {
 		this.gameMusic.pause();
 		this.gameMusic.currentTime = 0;
-		this.fail.play();
 		this._clearLevel();
-		popup.style.display = 'block';
-		popupTitle.innerText = 'You have failed';
-		nextBtn.style.display = 'none';
-		tryAgainBtn.style.display = 'inline';
+		
+		if (status === 'fail') {
+			this.fail.play();
+			renderFailScreen();
+		} else {
+			//should have a success sound
+			this.electricity.play();
+			renderPassScreen();
+		}
 	}
 
 	_toLevel(level) {
@@ -66,13 +58,9 @@ class Game {
 	}
 
 	//THIS SHOULD BE ELSEWHERE, TRIGGERING game.handleClick()
+	//nextBtn shouldn't be the same button as "start game"
 	startWelcome() {
-		gridHTML.style.backgroundImage = "url('./img/tileMetal.png')";
-		popup.style.display = 'block';
-		popupTitle.innerText = 'Welcome to the pipe game';
-		nextBtn.style.display = 'inline';
-		nextBtn.innerText = 'START GAME';
-		tryAgainBtn.style.display = 'none';
+		renderWelcomeScreen();
 
 		nextBtn.addEventListener('click', () => {
 			this.levelNumber++;
@@ -85,22 +73,25 @@ class Game {
 	}
 
 	loadLevel(number) {
+		//play music & should be inside startLevel
 		this.gameMusic.play();
 		//change param for timeLimit
 		this.currentLevel = new Level(10000);
+		this._checkIfLevelIsFinnished();
 
-		const intervalId = setInterval(() => {
-			if (this.currentLevel.isLevelComplete || this.currentLevel.isLevelFailed) {
-				clearInterval(intervalId);
-				const {isLevelComplete, isLevelFailed} = this.currentLevel;
-
-				isLevelFailed && this._endLevel();
-				isLevelComplete && this._passLevel();
-			}
-		}, 1);
 		gridHTML.style.backgroundImage = "url('./img/tileAqua.png')";
 
 		loadMap[number](this);
 		this.currentLevel.startLevel();
+	}
+
+	_checkIfLevelIsFinnished() {
+		const intervalId = setInterval(() => {
+			if (this.currentLevel.levelStatus) {
+				clearInterval(intervalId);
+				const status = this.currentLevel.levelStatus;
+				this._endLevel(status);
+			}
+		}, 1);
 	}
 }
