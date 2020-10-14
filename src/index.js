@@ -1,17 +1,16 @@
-const theme = new Audio('./sounds/theme.mp3');
-const thunder = new Audio('./sounds/electricity.wav');
-
+const introTheme = new Audio(INTRO_THEME);
 const PIPES_IMG_PATH = './img/pipes/';
 
 startGameBtn.addEventListener('click', () => {
-    theme.pause();
-    thunder.play();
+    introTheme.pause();
+    //make opening sound
+    //thunder.play();
     openingScreen.remove();
     new Game();
     renderWelcomeScreen();
 });
 
 introBtn.addEventListener('click', () => {
-    theme.play();
+    introTheme.play();
     animation.style.display = 'block';
 });

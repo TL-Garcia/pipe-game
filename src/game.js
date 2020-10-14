@@ -3,9 +3,9 @@ class Game {
 		this.levelNumber = 0;
 		this._setLvlSelectorClick();
 
-		this.electricity = new Audio('./sounds/electricity.wav');
-		this.fail = new Audio('./sounds/fail.mp3');
-		this.gameMusic = new Audio('./sounds/game.mp3');
+		this.failSound = new Audio(FAIL_SOUND);
+		this.successSound = new Audio(SUCCESS_SOUND);
+		this.levelTheme = new Audio(LEVEL_THEME);
 
 		this.handleClicks();
 	}
@@ -28,16 +28,14 @@ class Game {
 	}
 
 	_endLevel(status) {
-		this.gameMusic.pause();
-		this.gameMusic.currentTime = 0;
+		this._stopLevelTheme();
 		this._clearLevel();
-		
+
 		if (status === 'fail') {
-			this.fail.play();
+			this.failSound.play();
 			renderFailScreen();
 		} else {
-			//should have a success sound
-			this.electricity.play();
+			this.successSound.play();
 			renderPassScreen();
 		}
 	}
@@ -75,8 +73,6 @@ class Game {
 	}
 
 	loadLevel(number) {
-		//play music & should be inside startLevel
-		this.gameMusic.play();
 		//change param for timeLimit
 		this.currentLevel = new Level(10000);
 		this._checkIfLevelIsFinished();
@@ -84,6 +80,7 @@ class Game {
 		gridHTML.style.backgroundImage = "url('./img/tileAqua.png')";
 
 		loadMap[number](this);
+		this.levelTheme.play();
 		this.currentLevel.startLevel();
 	}
 
@@ -95,5 +92,10 @@ class Game {
 				this._endLevel(status);
 			}
 		}, 1);
+	}
+
+	_stopLevelTheme() {
+		this.levelTheme.pause();
+		this.levelTheme.currentTime = 0;
 	}
 }
