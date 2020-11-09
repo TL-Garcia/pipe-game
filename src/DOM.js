@@ -9,6 +9,7 @@ const startGameBtn = document.getElementById('start-game-btn');
 const toLevelBtns = document.querySelectorAll('.level-select__btn');
 
 const gridHTML = document.querySelector('.grid');
+const progressBarCtx = document.getElementById('progress-bar').getContext('2d');
 
 const introBtn = document.getElementById('intro-btn');
 const animation = document.getElementById('intro-animation');

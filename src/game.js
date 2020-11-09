@@ -49,14 +49,6 @@ class Game {
 		this.loadLevel(this.levelNumber);
 	}
 
-	// THIS SHOULD BE ELSEWHERE
-	_updateTimeBar() {
-		const timePercent = Math.round(
-			(100 * this.timeRemaining) / this.timeLimit
-		);
-		timeBar.value = timePercent;
-	}
-
 	handleClicks() {
 		nextBtn.addEventListener('click', () => {
 			this.levelNumber++;
