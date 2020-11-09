@@ -5,10 +5,20 @@ class ProgressBar {
 		this.timeRemaining = this.timeLimit;
 		this.timeRatio = this.timeRemaining / this.timeLimit;
 
-		this.x = 0;
-		this.y = 0;
-		this.w = this.ctx.canvas.width;
-		this.h = this.ctx.canvas.height;
+		this.X = 0;
+		this.Y = 0;
+		this.W = this.ctx.canvas.width;
+		this.H = this.ctx.canvas.height;
+
+		this.x = this.X;
+		this.y = this.Y;
+		this.w = this.W;
+		this.h = this.H;
+
+		this.sx = this.X;
+		this.sy = this.Y;
+		this.sw = 280;
+		this.sh = 2160;
 		this.vy = -2;
 
 		this.img = new Image();
@@ -21,13 +31,38 @@ class ProgressBar {
 		if (this.timeRemaining % 20 === 0) {
 			this._clear();
 			this.draw();
-			this.move();
+			//this.move();
 		}
 	}
 
 	draw() {
-		this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
-		this.ctx.drawImage(this.img, this.x, this.y + this.h, this.w, this.h);
+		//this.h = this.H * this.timeRatio;
+		this.y = this.H - this.H * this.timeRatio;
+		this.sy = this.sh - this.sh * this.timeRatio;
+
+	 	this.ctx.drawImage(
+			this.img,
+			this.sx,
+			this.sy,
+			this.sw,
+			this.sh,
+			this.x,
+			this.y,
+			this.w,
+			this.h
+		); 
+
+/* 		this.ctx.drawImage(
+			this.img,
+			this.sx,
+			this.sy,
+			this.sw,
+			this.sh,
+			this.x,
+			this.y + this.H,
+			this.w,
+			this.h
+		); */
 	}
 
 	move() {
